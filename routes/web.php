@@ -17,17 +17,18 @@ Route::get('/', function () {
 
 //auth route
 Route::any('/login', 'Admin\AuthController@login')->name('admin.login');
+Route::post('logout', 'Admin\AuthController@logout')->name('admin.logout');
 //route admin
 Route::group(['middleware' => 'admin', 'prefix' => 'backend'], function (){
     Route::get('/', 'Admin\DashboardController@index')->name('admin.index');
-    
+    Route::any('profile', 'Admin\AuthController@profile')->name('admin.profile');
     /**
     category route
      */
-    // Route::get(['prefix' => 'category', 'as' => 'category.'], function(){
-    // 	Route::get('/', 'Admin\CategoryController@index')->name('index');
-    // 	Route::any('create', 'Admin\CategoryController@create')->name('create');
-    // 	Route::any('edit/{id}', 'Admin\CategoryController@create')->name('edit');
-    // 	Route::post('delete/{id}', 'Admin\CategoryController@delete')->name('delete');
-    // });
+     Route::group(['prefix' => 'category'], function (){
+        Route::get('/', 'Admin\CategoryController@index')->name('admin.category.index');
+        Route::any('create','Admin\CategoryController@create')->name('admin.category.create');
+        Route::any('edit/{id}','Admin\CategoryController@create')->name('admin.category.edit');
+        Route::get('delete/{id}', 'Admin\CategoryController@delete')->name('admin.category.delete');
+     });
 });

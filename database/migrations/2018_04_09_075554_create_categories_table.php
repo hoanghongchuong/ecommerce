@@ -17,7 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('admin_id');
 //            $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');
-            $table->unsignedInteger('parent_id')->nullable();
+            $table->unsignedInteger('parent_id')->default(0);
             $table->string('name', 200);
             $table->string('slug', 250);
             $table->boolean('is_highlight')->default(0)->comment('danh mục nổi bật');

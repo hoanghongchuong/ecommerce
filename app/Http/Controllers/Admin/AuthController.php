@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
-
+use DB;
 class AuthController extends Controller
 {
     /*
@@ -24,7 +24,10 @@ class AuthController extends Controller
         $this->Admin = $admin;
         $this->guard = Auth::guard('admin');
     }
-
+    /*
+     * action login admin
+     * @return redirect
+     */
     public function login(Request $req)
     {
         if($this->guard->check()){
@@ -45,8 +48,49 @@ class AuthController extends Controller
         ], isset($account['remember']) ? true : false)){
             return redirect()->route('admin.index');
         }else{
-            return redirect()->back();
+            return redirect()->back()->with('message','Email hoặc password không chính xác');
         }
 
+    }
+
+    public function profile(Request $req)
+    {
+        if($req->isMethod('GET')){
+            $user_id = $this->guard->user()->id;
+            $user = $this->Admin->find($user_id);
+            return view('admin.auth.profile',compact('user'));
+        }
+        $req->validate([
+            'password' => 'nullable|min:6|confirmed',
+            'full_name' => 'required',
+            'avatar' => 'nullable',
+        ]);
+        $data = $req->only(['full_name', 'password', 'avatar']);
+//        dd($data);
+        if(isset($data['password'])){
+            $data['password'] = \Hash::make($data['password']);
+        }else{
+            unset($data['password']);
+        }
+        $full_name = $req->full_name;
+//        dd($full_name);
+//        dd($this->guard->user());
+        $this->guard->user()->where('id', $this->guard->user()->id)->update($data);
+//        $data = DB::table('admins')
+//            ->where('id', $this->guard->user()->id)
+//            ->update([
+//           'full_name' => $full_name,
+//
+//        ]);
+        return redirect()->back()->with('message', 'Cập nhật thành công');
+
+    }
+    /*
+     * action logout
+     */
+    public function logout()
+    {
+        Auth::guard('admin')->logout();
+        return redirect()->route('admin.login');
     }
 }

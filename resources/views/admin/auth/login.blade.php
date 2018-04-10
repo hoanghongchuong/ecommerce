@@ -41,6 +41,9 @@
                 <input type="password" name="password" required class="form-control" placeholder="Password">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
+            @if(session('message'))
+                <p style="color:red">{{ session('message') }}</p>
+            @endif
             <div class="row">
                 <div class="col-xs-8">
                     <div class="checkbox icheck">
@@ -54,7 +57,6 @@
                 </div><!-- /.col -->
             </div>
         </form>
-
 
 
         {{--<a href="#">I forgot my password</a><br>--}}

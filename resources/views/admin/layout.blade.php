@@ -27,14 +27,17 @@
     <link rel="stylesheet" href="{{asset('/admin_assets/plugins/datepicker/datepicker3.css')}}">
     <!-- Daterange picker -->
     <link rel="stylesheet" href="{{asset('/admin_assets/plugins/daterangepicker/daterangepicker-bs3.css')}}">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="{{asset('/admin_assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
-
+    <!-- jQuery 2.1.4 -->
+    <script src="{{asset('/admin_assets/plugins/jQuery/jQuery-2.1.4.min.js')}}"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
     <![endif]-->
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -54,19 +57,18 @@
     
 </div><!-- ./wrapper -->
 
-<!-- jQuery 2.1.4 -->
-    <script src="{{asset('/admin_assets/plugins/jQuery/jQuery-2.1.4.min.js')}}"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
         $.widget.bridge('uibutton', $.ui.button);
     </script>
     <!-- Bootstrap 3.3.5 -->
     <script src="{{asset('/admin_assets/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <!-- Morris.js charts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="{{asset('/admin_assets/plugins/morris/morris.min.js')}}"></script>
+    <script src="{{asset('/admin_assets/dist/js/custom.js')}}"></script>
+
+    {{--<script src="{{asset('/admin_assets/plugins/morris/morris.min.js')}}"></script>--}}
     <!-- Sparkline -->
     <script src="{{asset('/admin_assets/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
     <!-- jvectormap -->
@@ -75,10 +77,13 @@
     <!-- jQuery Knob Chart -->
     <script src="{{asset('/admin_assets/plugins/knob/jquery.knob.js')}}"></script>
     <!-- daterangepicker -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js')}}"></script> -->
+
     <script src="{{asset('/admin_assets/plugins/daterangepicker/daterangepicker.js')}}"></script>
     <!-- datepicker -->
     <script src="{{asset('/admin_assets/plugins/datepicker/bootstrap-datepicker.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <!-- Bootstrap WYSIHTML5 -->
     <script src="{{asset('/admin_assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>
     <!-- Slimscroll -->
@@ -91,5 +96,6 @@
     <script src="{{asset('/admin_assets/dist/js/pages/dashboard.js')}}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{asset('/admin_assets/dist/js/demo.js')}}"></script>
+
 </body>
 </html>
