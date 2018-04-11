@@ -55,7 +55,18 @@ class ProductController extends Controller
             $image->move(public_path('uploads/products'), $data['image']);
             $data['image'] = 'uploads/products/' . $data['image'];
         }
-//        dd($data);
+        
+        if ($req->hasFile('album_image')) {
+            foreach ($req->file('album_image') as $index => $file) {
+                $imageFileName = time() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('uploads/products'), $imageFileName);
+                $data['album'][$index] = 'uploads/products/' . $imageFileName;
+                dd($file);
+            }
+            
+        }
+        
+
         $this->Product->updateOrCreate(['id' => $id], $data);
         return redirect()->route('admin.product.index')->with('message', 'Cập nhật thành công');
     }

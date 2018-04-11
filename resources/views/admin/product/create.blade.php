@@ -129,7 +129,7 @@
                                 <div class="tab-pane" id="tab_5">
                                     <div class="form-group">
                                         <label class="control-label">Chọn ảnh</label>
-                                        <input id="input-2" name="album[]" type="file" class="file" multiple data-show-upload="false" data-show-caption="true" data-allowed-file-extensions='["jpeg", "jpg", "png", "gif"]'>
+                                        <input id="input-2" name="album_image[]" type="file" class="file" multiple data-show-upload="false" data-show-caption="true" data-allowed-file-extensions='["jpeg", "jpg", "png", "gif"]'>
                                     </div>
                                 </div>
                                 <div class="tab-pane" id="tab_3">
