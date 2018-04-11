@@ -21,11 +21,11 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <div class="form-group">
-                                        <img src=""  width="200" />
-                                        <input type="hidden" name="img_current" value="{!! @$data->photo !!}">
+                                        <img src="{{asset($user->avatar)}}" class="image_upload_preview"  width="200" />
+                                        <input type="hidden" name="img_current" value="">
                                     </div>
                                     <label for="file">Chọn File ảnh</label>
-                                    <input type="file" id="file" name="fImages" >
+                                    <input type="file" id="file" class="inputFile" name="image" >
                                     <p class="help-block">Width:225px - Height: 162px</p>
                                 </div>
                                 <div class="form-group">

@@ -28,8 +28,7 @@
                                     <th>Danh mục cha</th>
                                     <th>Đường dẫn</th>
                                     <th>Ảnh</th>
-                                    <th>Hiển thị</th>
-                                    <th></th>
+                                    <th>Hành động</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -37,12 +36,20 @@
                                 <tr>
                                     <td>{{$k+1}}</td>
                                     <td>{{$item->name}}</td>
-                                    <td>danh mục cha</td>
+                                    <td>
+                                    <?php  $parent = DB::table('categories')->where('id', $item->parent_id)->first();
+                                    ?>
+                                    @if(!empty($parent))
+                                        {{ $parent->name }}
+                                    @else
+                                        {{ 'None' }}
+                                    @endif
+                                    </td>
                                     <td>{{$item->slug}}</td>
                                     <td><img src="{{asset($item->image)}}" style="width:150px" alt=""></td>
-                                    <td><a href="" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i>  Hiển thị</a></td>
+                                    {{--<td><a href="" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i>  Hiển thị</a></td>--}}
                                     <td>
-                                        <a class="btn btn-warning" style="margin-right: 5px;" href="">
+                                        <a class="btn btn-warning" style="margin-right: 5px;" href="{{ route('admin.category.edit', $item->id) }}">
                                             <i class="fa fa-edit"> Sửa</i>
                                         </a>
                                         <a class="btn btn-danger" href="{{route('admin.category.delete', $item->id)}}">

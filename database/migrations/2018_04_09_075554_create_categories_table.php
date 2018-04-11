@@ -21,6 +21,7 @@ class CreateCategoriesTable extends Migration
             $table->string('name', 200);
             $table->string('slug', 250);
             $table->boolean('is_highlight')->default(0)->comment('danh mục nổi bật');
+            $table->boolean('active')->default(1);
             $table->string('image')->nullable();
             $table->text('description')->nullable();
             $table->text('keyword')->nullable();

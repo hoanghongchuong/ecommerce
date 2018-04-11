@@ -13,6 +13,7 @@ class Category extends AbstractModel
         'slug',
         'image',
         'is_highlight',
+        'active',
         'description',
         'title',
         'keyword'
@@ -24,7 +25,7 @@ class Category extends AbstractModel
      */
     public function getAllCategories()
     {
-        $query = $this->select('name', 'parent_id', 'slug', 'image', 'is_highlight', 'id')
+        $query = $this->select('name', 'parent_id', 'slug', 'image', 'is_highlight', 'id','active')
                 ->orderBy('id', 'desc')
                 ->get();
         return $query;

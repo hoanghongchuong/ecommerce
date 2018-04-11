@@ -31,4 +31,13 @@ Route::group(['middleware' => 'admin', 'prefix' => 'backend'], function (){
         Route::any('edit/{id}','Admin\CategoryController@create')->name('admin.category.edit');
         Route::get('delete/{id}', 'Admin\CategoryController@delete')->name('admin.category.delete');
      });
+     /*
+      * product route
+      */
+     Route::group(['prefix' => 'product'], function(){
+        Route::get('/', 'Admin\ProductController@index')->name('admin.product.index');
+        Route::any('create', 'Admin\ProductController@create')->name('admin.product.create');
+        Route::any('edit/{id}', 'Admin\ProductController@create')->name('admin.product.edit');
+        Route::get('delete/{id}', 'Admin\ProductController@delete')->name('admin.product.delete');
+     });
 });

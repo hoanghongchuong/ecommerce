@@ -25,7 +25,6 @@ class CategoryController extends Controller
         $categories = $this->Category->getAllCategories();
         return view('admin.category.index', compact('categories'));
     }
-
     /*
      * create and update action
      * @param Request $req
@@ -37,7 +36,8 @@ class CategoryController extends Controller
             if($id){
                 $category = $this->Category->findOrFail($id);
             }
-            return view('admin.category.create', compact('category', 'id'));
+            $parent = $this->Category->select('id', 'name', 'parent_id')->get()->toArray();
+            return view('admin.category.create', compact('category', 'id', 'parent'));
         }
         $req->validate([
            'name' => 'required',
@@ -45,7 +45,6 @@ class CategoryController extends Controller
             'image' => 'nullable|image|max:2048',
         ]);
         $data = $req->only($this->Category->getFieldList());
-
         $data['name'] = $req->name;
         $data['parent_id'] = $req->parent_id;
         $data['admin_id'] = $req->admin->id;
@@ -61,6 +60,7 @@ class CategoryController extends Controller
             $data['image'] = 'uploads/categories/' . $data['image'];
         }
         $data['is_highlight'] = isset($data['is_highlight']) ? true : false;
+        $data['active'] = isset($data['active']) ? true : false;
         $this->Category->updateOrCreate(['id' => $id], $data);
         return redirect()->route('admin.category.index')->with('message', 'Cập nhật thành công');
     }

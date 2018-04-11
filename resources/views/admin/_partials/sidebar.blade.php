@@ -4,7 +4,7 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="{{asset('admin_assets/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+                <img src="{{asset($admin->avatar)}}" style="width:50px;height: 40px;" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
                 <p>Admin</p>
@@ -23,7 +23,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{ route('admin.category.index') }}"><i class="fa fa-circle-o"></i><span>Danh mục sản phẩm</span></a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Sản phẩm</span></a></li>
+                    <li><a href="{{ route('admin.product.index') }}"><i class="fa fa-circle-o"></i><span>Sản phẩm</span></a></li>
                 </ul>
             </li>            
             <li class="treeview">

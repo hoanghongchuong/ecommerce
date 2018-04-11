@@ -39,31 +39,42 @@
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tên danh mục <span style="color:red">(*)</span></label>
-                                <input type="text" class="form-control" id="txtName" name="name" placeholder="Tên danh mục">
+                                <input type="text" class="form-control" id="txtName" name="name" value="{{@$category->name}}" placeholder="Tên danh mục">
                             </div>
                             <div class="form-group">
                                 <label for="">Đường dẫn <span style="color:red">(*)</span></label>
-                                <input type="text" class="form-control" id="txtAlias" name="slug" placeholder="Đường dẫn">
+                                <input type="text" class="form-control" id="txtAlias" value="{{@$category->slug}}" name="slug" placeholder="Đường dẫn">
                             </div>
                             <div class="form-group">
                                 <label for="">Mô tả</label>
-                                <textarea name="description" id="" placeholder="Mô tả..." class="form-control" cols="30" rows="10"></textarea>
+                                <textarea name="description" id="" placeholder="Mô tả..." class="form-control" cols="30" rows="10">
+                                    {{@$category->description}}
+                                </textarea>
                             </div>
+
                             <div class="form-group">
-                                <label for="">Danh mục cha</label>
-                                <select name="parent_id" class="form-control" id="">
-                                    <option value="">-- Chọn danh mục cha --</option>
-                                    <option value="">danh mucj cha 1</option>
+                                <label for="ten">Danh mục cha</label>
+                                <select name="parent_id" class="form-control">
+                                    <option value="0">Chọn danh mục</option>
+                                    <?php cate_parent($parent,0,"--",isset($category) ? $category->parent_id : ''); ?>
                                 </select>
-                            </div>
+                          </div>
                             <div class="form-group">
                                 <label for="exampleInputFile">Ảnh</label>
-                                <input type="file" name="image" id="">
+                                <p><img src="{{ asset(@$category->image) }}" class="image_upload_preview" style="width:150px;" alt=""></p>
+                                <input type="file" name="image" class="inputFile" id="">
                                 {{--<p class="help-block">Example block-level help text here.</p>--}}
                             </div>
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox"> Nổi bật
+                                    <input type="checkbox" name="is_highlight"
+                                        {!! (isset($category) && $category->is_highlight==1)?'checked="checked"':'' !!}> Nổi bật
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="active"
+                                        {!! (isset($category) && $category->active==1)?'checked="checked"':'' !!}> Hiển thị
                                 </label>
                             </div>
                         </div><!-- /.box-body -->

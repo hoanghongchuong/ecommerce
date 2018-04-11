@@ -66,22 +66,18 @@ class AuthController extends Controller
             'avatar' => 'nullable',
         ]);
         $data = $req->only(['full_name', 'password', 'avatar']);
-//        dd($data);
         if(isset($data['password'])){
             $data['password'] = \Hash::make($data['password']);
         }else{
             unset($data['password']);
         }
-        $full_name = $req->full_name;
-//        dd($full_name);
-//        dd($this->guard->user());
+        if ($req->hasFile('image')) {
+            $image         = $req->file('image');
+            $data['avatar'] = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('uploads/admin'), $data['avatar']);
+            $data['avatar'] = 'uploads/admin/' . $data['avatar'];
+        }
         $this->guard->user()->where('id', $this->guard->user()->id)->update($data);
-//        $data = DB::table('admins')
-//            ->where('id', $this->guard->user()->id)
-//            ->update([
-//           'full_name' => $full_name,
-//
-//        ]);
         return redirect()->back()->with('message', 'Cập nhật thành công');
 
     }
