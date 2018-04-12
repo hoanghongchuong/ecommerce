@@ -60,7 +60,7 @@ class CategoryController extends Controller
             $data['image'] = 'uploads/categories/' . $data['image'];
         }
         $data['is_highlight'] = isset($data['is_highlight']) ? true : false;
-        $data['active'] = isset($data['active']) ? true : false;
+//        $data['active'] = isset($data['active']) ? true : false;
         $this->Category->updateOrCreate(['id' => $id], $data);
         return redirect()->route('admin.category.index')->with('message', 'Cập nhật thành công');
     }

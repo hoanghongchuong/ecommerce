@@ -71,12 +71,12 @@
                                         {!! (isset($category) && $category->is_highlight==1)?'checked="checked"':'' !!}> Nổi bật
                                 </label>
                             </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="active"
-                                        {!! (isset($category) && $category->active==1)?'checked="checked"':'' !!}> Hiển thị
-                                </label>
-                            </div>
+                            {{--<div class="checkbox">--}}
+                                {{--<label>--}}
+                                    {{--<input type="checkbox" name="active"--}}
+                                        {{--{!! (isset($category) && $category->active==1)?'checked="checked"':'' !!}> Hiển thị--}}
+                                {{--</label>--}}
+                            {{--</div>--}}
                         </div><!-- /.box-body -->
 
                         <div class="box-footer">

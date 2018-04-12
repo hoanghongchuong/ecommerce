@@ -15,8 +15,8 @@
 //    return view('welcome');
 //});
 Route::get('/', 'Front\HomeController@index')->name('home.index');
- Route::get('register/store/step1', 'Front\RegisterStoreController@register')->name('store.register');
-
+Route::get('register/store/step1', 'Front\RegisterStoreController@register')->name('store.register');
+Route::get('san-pham/{slug}', 'Front\ProductController@getProductByCate')->name('getProductByCate');
 
 
 
