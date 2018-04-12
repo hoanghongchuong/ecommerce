@@ -90,12 +90,18 @@
     <script src="{{asset('/admin_assets/plugins/slimScroll/jquery.slimscroll.min.js')}}"></script>
     <!-- FastClick -->
     <script src="{{asset('/admin_assets/plugins/fastclick/fastclick.min.js')}}"></script>
+    <script src="{{asset('/plugin/ckeditor/ckeditor.js')}}"></script>
+
     <!-- AdminLTE App -->
     <script src="{{asset('/admin_assets/dist/js/app.min.js')}}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{asset('/admin_assets/dist/js/pages/dashboard.js')}}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{asset('/admin_assets/dist/js/demo.js')}}"></script>
-
+<script>
+    for(var i = 1; i < 5; i++){
+        CKEDITOR.replace('textContent' + i);
+    }
+</script>
 </body>
 </html>

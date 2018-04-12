@@ -11,9 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+Route::get('/', 'Front\HomeController@index')->name('home.index');
+ Route::get('register/store/step1', 'Front\RegisterStoreController@register')->name('store.register');
+
+
+
+
 
 //auth route
 Route::any('/login', 'Admin\AuthController@login')->name('admin.login');

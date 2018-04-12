@@ -87,7 +87,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="desc">Mô tả</label>
-                                                <textarea name="des" rows="5" id="txtContent" class="form-control">
+                                                <textarea name="des" rows="5" id="textContent1" class="form-control">
                                                     {{ @$product->des }}
                                                 </textarea>
                                             </div>
@@ -105,7 +105,7 @@
                                           </div>
                                       </div>
                                       <div class="box-body pad">
-                                          <textarea name="properties" id="txtContent" cols="50" rows="5">
+                                          <textarea name="properties" id="textContent2" cols="50" rows="5">
                                               {{ @$product->properties }}
                                           </textarea>
                                       </div>
@@ -119,7 +119,7 @@
                                             </div>
                                         </div>
                                         <div class="box-body pad">
-                                            <textarea name="content" id="txtContent" cols="50" rows="5">
+                                            <textarea name="content" id="textContent3" cols="50" rows="5">
                                                 {{ @$product->content }}
                                             </textarea>
                                         </div>
@@ -128,6 +128,13 @@
                                 </div><!-- /.tab-pane -->
                                 <div class="tab-pane" id="tab_5">
                                     <div class="form-group">
+                                        @if(@$product)
+                                            @foreach(json_decode(@$product->album) as $album)
+                                            <div class="imag-album form-group" >
+                                                <img src="{{asset('uploads/products/'.$album)}}" style="width:200px" alt="">
+                                            </div>
+                                            @endforeach
+                                        @endif
                                         <label class="control-label">Chọn ảnh</label>
                                         <input id="input-2" name="album_image[]" type="file" class="file" multiple data-show-upload="false" data-show-caption="true" data-allowed-file-extensions='["jpeg", "jpg", "png", "gif"]'>
                                     </div>
@@ -149,7 +156,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="description">Description</label>
-                                                <textarea name="description" rows="5" class="form-control">
+                                                <textarea name="description" rows="5" id="" class="form-control">
                                                     {{ @$product->description }}
                                                 </textarea>
                                             </div>

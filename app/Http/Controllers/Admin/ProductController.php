@@ -6,7 +6,7 @@ use App\Models\Category;
 use App\Models\Album;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use File;
 class ProductController extends Controller
 {
     /*
@@ -58,15 +58,12 @@ class ProductController extends Controller
         
         if ($req->hasFile('album_image')) {
             foreach ($req->file('album_image') as $index => $file) {
-                $imageFileName = time() . '.' . $file->getClientOriginalExtension();
+                $imageFileName = time() . '_' . $file->getClientOriginalName();
                 $file->move(public_path('uploads/products'), $imageFileName);
-                $data['album'][$index] = 'uploads/products/' . $imageFileName;
-                dd($file);
+                $data['album'][$index] = $imageFileName;
             }
-            
+            $data['album'] = json_encode($data['album']);
         }
-        
-
         $this->Product->updateOrCreate(['id' => $id], $data);
         return redirect()->route('admin.product.index')->with('message', 'Cập nhật thành công');
     }

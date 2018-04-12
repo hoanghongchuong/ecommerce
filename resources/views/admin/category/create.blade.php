@@ -47,7 +47,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="">Mô tả</label>
-                                <textarea name="description" id="" placeholder="Mô tả..." class="form-control" cols="30" rows="10">
+                                <textarea name="description" id="textContent1" placeholder="Mô tả..." class="form-control" cols="30" rows="10">
                                     {{@$category->description}}
                                 </textarea>
                             </div>
