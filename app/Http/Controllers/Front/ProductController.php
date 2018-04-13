@@ -19,17 +19,17 @@ class ProductController extends AbstractBaseController
      * get product by slug category
      * @return view
      */
-    public function getProductByCate($slug)
-    {
-        $array_string = explode('-', $slug);
-        $last = array_pop($array_string);
-        $id = substr($last, 1);
-        $category = $this->Category->getOneCategoryById($id);
-        $products = $category->products;
-        $numbProduct = count($products);
-        return view('front.product.list', compact('products', 'category', 'numbProduct'));
-
-    }
+//    public function getProductByCate($slug)
+//    {
+//        $array_string = explode('-', $slug);
+//        $last = array_pop($array_string);
+//        $id = substr($last, 1);
+//        $category = $this->Category->getOneCategoryById($id);
+//        $products = $category->products;
+//        $numbProduct = count($products);
+//        return view('front.product.list', compact('products', 'category', 'numbProduct'));
+//
+//    }
 
     public function getDetailProduct($slug)
     {

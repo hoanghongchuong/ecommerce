@@ -24,9 +24,9 @@ Route::get('ajax/province', 'Front\HomeController@loadDistrictByProvince')->name
 
 
 
-Route::get('{slug}', 'Front\RootController@index')->name('root.index');
-Route::get('{slug}', 'Front\ProductController@getProductByCate')->name('getProductByCate');
-Route::get('{slug}', 'Front\ProductController@getDetailProduct')-> name('getDetailProduct');
+//Route::get('{slug}', 'Front\RootController@index')->name('root.index');
+//Route::get('{slug}', 'Front\ProductController@getProductByCate')->name('getProductByCate');
+//Route::get('{slug}', 'Front\ProductController@getDetailProduct')-> name('getDetailProduct');
 
 
 //auth route
