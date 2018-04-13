@@ -15,10 +15,18 @@
 //    return view('welcome');
 //});
 Route::get('/', 'Front\HomeController@index')->name('home.index');
-Route::get('register/store/step1', 'Front\RegisterStoreController@register')->name('store.register');
-Route::get('san-pham/{slug}', 'Front\ProductController@getProductByCate')->name('getProductByCate');
+/*
+ * route register store
+ */
+Route::get('register/store', 'Front\RegisterStoreController@register')->name('store.register');
+Route::post('register/store', 'Front\RegisterStoreController@postRegister')->name('store.postRegister');
+Route::get('ajax/province', 'Front\HomeController@loadDistrictByProvince')->name('loadDistrictByProvince');
 
 
+
+Route::get('{slug}', 'Front\RootController@index')->name('root.index');
+Route::get('{slug}', 'Front\ProductController@getProductByCate')->name('getProductByCate');
+Route::get('{slug}', 'Front\ProductController@getDetailProduct')-> name('getDetailProduct');
 
 
 //auth route
@@ -46,4 +54,32 @@ Route::group(['middleware' => 'admin', 'prefix' => 'backend'], function (){
         Route::any('edit/{id}', 'Admin\ProductController@create')->name('admin.product.edit');
         Route::get('delete/{id}', 'Admin\ProductController@delete')->name('admin.product.delete');
      });
+
+    /*
+     * province route
+     */
+    Route::group(['prefix' => 'province'], function(){
+        Route::get('/', 'Admin\ProvinceController@index')->name('province.index');
+        Route::get('add', 'Admin\ProvinceController@getCreate')->name('province.create');
+        Route::post('add','Admin\ProvinceController@postCreate')->name('province.postCreate');
+
+        Route::get('edit/{id}', 'Admin\ProvinceController@getEdit')->name('province.edit');
+        Route::post('edit/{id}','Admin\ProvinceController@postEdit')->name('province.postEdit');
+
+        Route::get('delete/{id}', 'Admin\ProvinceController@delete')->name('province.delete');
+    });
+
+    /*
+     * district route
+     */
+    Route::group(['prefix' => 'district'], function(){
+        Route::get('/', 'Admin\DistrictController@index')->name('district.index');
+        Route::get('add', 'Admin\DistrictController@getCreate')->name('district.create');
+        Route::post('add','Admin\DistrictController@postCreate')->name('district.postCreate');
+
+        Route::get('edit/{id}', 'Admin\DistrictController@getEdit')->name('district.edit');
+        Route::post('edit/{id}','Admin\DistrictController@postEdit')->name('district.postEdit');
+
+        Route::get('delete/{id}', 'Admin\DistrictController@delete')->name('district.delete');
+    });
 });

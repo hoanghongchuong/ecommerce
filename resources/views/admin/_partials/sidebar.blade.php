@@ -37,7 +37,9 @@
                     <li><a href="#"><i class="fa fa-circle-o"></i><span>Tin tức</span></a></li>
                 </ul>
             </li>
-            
+            <li><a href="backend/bankaccount"><i class="fa fa-envelope"></i><span>Quản lý tài khoản ngân hàng</span></a></li>
+            <li><a href="{{ route('province.index') }}"><i class="fa fa-gear" aria-hidden="true"></i> <span>Quản lý tỉnh/ thành phố</span></a></li>
+            <li><a href="{{ route('district.index') }}"><i class="fa fa-gear" aria-hidden="true"></i> <span>Quản lý quận/ huyện</span></a></li>
         </ul>
     </section>
     <!-- /.sidebar -->

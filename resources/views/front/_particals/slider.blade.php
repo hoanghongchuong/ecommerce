@@ -6,7 +6,7 @@
                     <ul>
                         @foreach($categories as $k => $category)
                         <li class="has-mega  @if($k == 0) active @endif ">
-                            <a href="{{ route('getProductByCate', $category->slug) }}" title="">{{ $category->name }} <i class="fa fa-angle-right"></i></a>
+                            <a href="{{ url($category->slug. '-c'. $category->id) }}" title="">{{ $category->name }} <i class="fa fa-angle-right"></i></a>
                             <div class="mega-wrap">
                                 <div class="row no-gutters">
                                     <div class="col-md-6 height-1">

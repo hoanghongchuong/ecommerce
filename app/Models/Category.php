@@ -44,7 +44,7 @@ class Category extends AbstractModel
     public function getProductsAttribute()
     {
         $categoryIdArray = $this->getChildCategories([$this->id]);
-        return \App\Models\Products::whereIn('category_id', $categoryIdArray)->paginate(8);
+        return \App\Models\Product::whereIn('category_id', $categoryIdArray)->paginate(8);
     }
 
 
@@ -57,5 +57,10 @@ class Category extends AbstractModel
         }
         $categoryArray = array_merge($categoryArray, $childIdArray);
         return $this->getChildCategories($categoryArray);
+    }
+
+    public function getOneCategoryById($id){
+        $data = $this->select('*')->where('id', $id)->first();
+        return $data;
     }
 }

@@ -24,7 +24,7 @@
             <div class="row">
                 <div class="col-md-3 header-col-1">
                     <div class="logo">
-                        <a href="index.html" title=""><img src="{{asset('/front/images/logo/logo.png')}}" alt="" title=""> </a>
+                        <a href="{{ url('') }}" title=""><img src="{{asset('/front/images/logo/logo.png')}}" alt="" title=""> </a>
                     </div>
                 </div>
                 <div class="col-md-6 header-col-2">

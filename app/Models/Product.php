@@ -34,4 +34,10 @@ class Product extends AbstractModel
             ->get();
         return $query;
     }
+
+    public function getDetail($id)
+    {
+        $result = $this->select('*')->where('id', $id)->first();
+        return $result;
+    }
 }

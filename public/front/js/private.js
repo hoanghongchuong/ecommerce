@@ -305,4 +305,26 @@ jQuery(function ($) {
             $(this).addClass('current');
         })
     });
+
+    $(document).ready(function(){
+
+        $('#province_id').change(function(){
+            var pro_id = $(this).val();
+            // alert(pro_id);
+            // $.get("ajax/province/"+pro_id, function(data){
+            //     // alert(data);
+            //     $('#district_id').html(data);
+            // });
+            $.ajax({
+               url: window.urlLoadDistrict,
+               type: 'get',
+               data: {
+                    id: pro_id
+               },
+                success: function (data) {
+                    $('#district_id').html(data);
+                }
+            });
+        });
+    });
 });

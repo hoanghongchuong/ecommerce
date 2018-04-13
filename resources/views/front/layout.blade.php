@@ -21,15 +21,24 @@
 
     <!--Jquery library-->
     <script type="text/javascript" src="{{asset('/front/js/jquery.min.js')}}"></script>
+    <script type="text/javascript">
+        function baseUrl(){
+            return '<?php echo url('/'); ?>';
+        }
+        {{--window.token = '{{ csrf_token() }}';--}}
+        {{--window.urlAddCart = '{{ route("addProductToCartAjax") }}';--}}
+        window.urlLoadDistrict = '{{ route("loadDistrictByProvince") }}';
+
+    </script>
 </head>
 <body>
 
 
 @include('front._particals.header')
-<main class="cd-main-content">
+
     @yield('content')
 
-</main>
+
 @include('front._particals.footer')
 
 <!-- Navfixed Left-->
