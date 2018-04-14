@@ -5,8 +5,8 @@
             <div class="container">
                 <ul class="flex-center">
                     <li><a href="{{ url('') }}" title=""><i class="fa fa-home"></i> Trang chủ</a> </li>
-                    <li><a href="#" title="">Siêu thị - Tạp hóa - Tiêu dùng</a></li>
-                    <li><span>Bánh pía vị Sầu Riêng</span> </li>
+                    <li><a href="{{url($category->slug . '-c'.$category->id)}}" title="{{$category->name}}">{{$category->name}}</a></li>
+                    <li><span>{{$product->name}}</span> </li>
                 </ul>
             </div>
         </section>
@@ -49,7 +49,7 @@
                             </div>
                             <div class="col-md-5">
                                 <div class="productDetail-desc">
-                                    <h1 class="title-page">Bánh pía chay sầu riêng 300Gr</h1>
+                                    <h1 class="title-page">{{$product->name}}</h1>
                                     <div class="product-status">
                                         <div class="star">
                                             <i class="fa fa-star"></i>
@@ -70,10 +70,14 @@
                                         </div>
                                     </div>
                                     <div class="price-box in-detail-page">
-                                        <span class="price-down">-26%</span>
+                                        @if($product->price_old > $product->price)
+                                            <span class="price-down">-{{ 100 - ($product->price*100 / $product->price_old) }}%</span>
+                                            @else
+                                                <span class="price-down">-0%</span>
+                                        @endif
                                         <div class="pro-price">
-                                            <p class="new-price">240.000 ₫</p>
-                                            <p class="old-price">Giá cũ: 300.000 đ</p>
+                                            <p class="new-price">{{ number_format($product->price) }} ₫</p>
+                                            <p class="old-price">Giá cũ: {{ number_format($product->price_old) }} đ</p>
                                         </div>
                                     </div>
                                     <div class="product-shortdesc">

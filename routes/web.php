@@ -24,7 +24,7 @@ Route::get('ajax/province', 'Front\HomeController@loadDistrictByProvince')->name
 
 
 
-//Route::get('{slug}', 'Front\RootController@index')->name('root.index');
+
 //Route::get('{slug}', 'Front\ProductController@getProductByCate')->name('getProductByCate');
 //Route::get('{slug}', 'Front\ProductController@getDetailProduct')-> name('getDetailProduct');
 
@@ -83,3 +83,5 @@ Route::group(['middleware' => 'admin', 'prefix' => 'backend'], function (){
         Route::get('delete/{id}', 'Admin\DistrictController@delete')->name('district.delete');
     });
 });
+
+Route::get('{slug}', 'Front\RootController@index')->name('root.index');

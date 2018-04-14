@@ -56,15 +56,27 @@ class ProductController extends Controller
             $data['image'] = 'uploads/products/' . $data['image'];
         }
         
+        // if ($req->hasFile('album_image')) {
+        //     foreach ($req->file('album_image') as $index => $file) {
+        //         $imageFileName = time() . '_' . $file->getClientOriginalName();
+        //         $file->move(public_path('uploads/products'), $imageFileName);
+        //         $data['album'][$index] = $imageFileName;
+        //     }
+        //     $data['album'] = json_encode($data['album']);
+        // }
+        $gallaries = [];
+        $this->Product->updateOrCreate(['id' => $id], $data);
         if ($req->hasFile('album_image')) {
             foreach ($req->file('album_image') as $index => $file) {
                 $imageFileName = time() . '_' . $file->getClientOriginalName();
                 $file->move(public_path('uploads/products'), $imageFileName);
-                $data['album'][$index] = $imageFileName;
+                $image = 'upload/products' .$imageFileName;
             }
-            $data['album'] = json_encode($data['album']);
+            $gallaries['product_id'] = $this->Product->updateOrCreate(['id' => $id], $data)->id;
+            $gallaries['image'] = $image;
+            // $gallaries = $image;
         }
-        $this->Product->updateOrCreate(['id' => $id], $data);
+        Album::insert($gallaries);
         return redirect()->route('admin.product.index')->with('message', 'Cập nhật thành công');
     }
 
