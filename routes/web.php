@@ -21,10 +21,12 @@ Route::get('/', 'Front\HomeController@index')->name('home.index');
 Route::get('register/store', 'Front\RegisterStoreController@register')->name('store.register');
 Route::post('register/store', 'Front\RegisterStoreController@postRegister')->name('store.postRegister');
 Route::any('store/login', 'Front\RegisterStoreController@login')->name('store.login');
-Route::get('store','Front\StoreController@index')->name('store.index');
+
 Route::get('ajax/province', 'Front\HomeController@loadDistrictByProvince')->name('loadDistrictByProvince');
 
-
+Route::group(['middleware' => 'is_store', 'prefix' => 'store'], function(){
+    Route::get('/','Front\StoreController@index')->name('store.index');
+});
 
 
 //Route::get('{slug}', 'Front\ProductController@getProductByCate')->name('getProductByCate');
@@ -41,7 +43,7 @@ Route::group(['middleware' => 'admin', 'prefix' => 'backend'], function (){
     /**
     category route
      */
-     Route::group(['prefix' => 'category'], function (){
+    Route::group(['prefix' => 'category'], function (){
         Route::get('/', 'Admin\CategoryController@index')->name('admin.category.index');
         Route::any('create','Admin\CategoryController@create')->name('admin.category.create');
         Route::any('edit/{id}','Admin\CategoryController@create')->name('admin.category.edit');
@@ -50,12 +52,20 @@ Route::group(['middleware' => 'admin', 'prefix' => 'backend'], function (){
      /*
       * product route
       */
-     Route::group(['prefix' => 'product'], function(){
+    Route::group(['prefix' => 'product'], function(){
         Route::get('/', 'Admin\ProductController@index')->name('admin.product.index');
         Route::any('create', 'Admin\ProductController@create')->name('admin.product.create');
         Route::any('edit/{id}', 'Admin\ProductController@create')->name('admin.product.edit');
         Route::get('delete/{id}', 'Admin\ProductController@delete')->name('admin.product.delete');
      });
+
+     /*
+      *route store
+      */
+    Route::group(['prefix' => 'store'], function (){
+        Route::get('/','Admin\StoreController@index')->name('admin.store.index');
+        Route::get('edit/{id}','Admin\StoreController@detailStore')->name('admin.store.detail');
+    });
 
     /*
      * province route
