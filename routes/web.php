@@ -20,6 +20,8 @@ Route::get('/', 'Front\HomeController@index')->name('home.index');
  */
 Route::get('register/store', 'Front\RegisterStoreController@register')->name('store.register');
 Route::post('register/store', 'Front\RegisterStoreController@postRegister')->name('store.postRegister');
+Route::any('store/login', 'Front\RegisterStoreController@login')->name('store.login');
+Route::get('store','Front\StoreController@index')->name('store.index');
 Route::get('ajax/province', 'Front\HomeController@loadDistrictByProvince')->name('loadDistrictByProvince');
 
 

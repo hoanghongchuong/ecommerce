@@ -45,7 +45,6 @@ class ProductController extends Controller
         $data = $req->only($this->Product->getFieldList());
         $data['author'] = $req->admin->id;
         $data['slug'] = isset($req->slug) ? $req->slug : str_slug($req->name);
-
         $data['is_highlight'] = isset($data['is_highlight']) ? true : false;
         $data['active']    = isset($data['active']) ? true : false;
 
@@ -64,19 +63,22 @@ class ProductController extends Controller
         //     }
         //     $data['album'] = json_encode($data['album']);
         // }
-        $gallaries = [];
-        $this->Product->updateOrCreate(['id' => $id], $data);
+        
+        $newProduct = $this->Product->updateOrCreate(['id' => $id], $data);
+
+         $galeries = [];
         if ($req->hasFile('album_image')) {
             foreach ($req->file('album_image') as $index => $file) {
                 $imageFileName = time() . '_' . $file->getClientOriginalName();
                 $file->move(public_path('uploads/products'), $imageFileName);
-                $image = 'upload/products' .$imageFileName;
+                $galeries[] = [
+                    'product_id' => $newProduct->id,
+                    'image' => 'uploads/products/' . $imageFileName
+                ];
             }
-            $gallaries['product_id'] = $this->Product->updateOrCreate(['id' => $id], $data)->id;
-            $gallaries['image'] = $image;
-            // $gallaries = $image;
         }
-        Album::insert($gallaries);
+
+        Album::insert($galeries);
         return redirect()->route('admin.product.index')->with('message', 'Cập nhật thành công');
     }
 

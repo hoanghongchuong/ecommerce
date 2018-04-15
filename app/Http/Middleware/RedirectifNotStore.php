@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class RedirectIfNotAdmin
+class RedirectIfNotStore
 {
     /**
      * define guard
@@ -18,7 +18,7 @@ class RedirectIfNotAdmin
      */
     public function __construct()
     {
-        $this->guard = Auth::guard('admin');
+        $this->guard = Auth::guard('is_store');
     }
     /**
      * Handle an incoming request.
@@ -31,11 +31,11 @@ class RedirectIfNotAdmin
     public function handle($request, Closure $next)
     {
         if ($this->guard->check() || $this->guard->viaRemember()) {
-            $admin = $this->guard->user();
-            view()->share('admin', $admin);
+            $is_store = $this->guard->user();
+            view()->share('is_store', $is_store);
             view()->share('currentRoute', $request->route()->getName());
-            $request->admin = $admin;
+            $request->is_store = $is_store;
             return $next($request);
         }
-        return redirect()->route('admin.login');
+        return redirect()->route('store.login');
     }}

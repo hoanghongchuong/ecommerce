@@ -128,13 +128,14 @@
                                 </div><!-- /.tab-pane -->
                                 <div class="tab-pane" id="tab_5">
                                     <div class="form-group">
-                                        @if(@$product)
-                                            @foreach(json_decode(@$product->album) as $album)
+                                            <?php $albums = DB::table('albums')->where('product_id', @$product->id)->get(); ?>
+                                            @if($albums)
+                                            @foreach($albums as $album)
                                             <div class="imag-album form-group" >
-                                                <img src="{{asset('uploads/products/'.$album)}}" style="width:200px" alt="">
+                                                <img src="{{asset($album->image)}}" style="width:150px" alt="">
                                             </div>
                                             @endforeach
-                                        @endif
+                                            @endif
                                         <label class="control-label">Chọn ảnh</label>
                                         <input id="input-2" name="album_image[]" type="file" class="file" multiple data-show-upload="false" data-show-caption="true" data-allowed-file-extensions='["jpeg", "jpg", "png", "gif"]'>
                                     </div>

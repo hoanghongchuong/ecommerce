@@ -49,7 +49,7 @@
         <!--</div>-->
         <!--</div>-->
         <!--</div>-->
-        <form class="form-tk" id="step-register" method="post" action="{{ route('store.postRegister') }}">
+        <form class="form-tk" id="step-register" method="post" action="{{ route('store.postRegister') }}" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="container">
                 <h1 class="title-page">Đăng ký bán hàng cùng Fbuy</h1>
@@ -59,19 +59,37 @@
                         <div class="col-md-4 offset-md-4 col-lg-4 offset-lg-4">
                             <div class="tk-block">
                                 <label>Tên công ty / Tên cửa hàng  (*)</label>
-                                <input type="text" name="full_name" required placeholder="Tên công cty hoặc tên cửa hàng">
+                                <input type="text" name="full_name"  placeholder="Tên công cty hoặc tên cửa hàng">
+                                @if ($errors->first('full_name')!='')
+                                    <label class="control-label" for="inputError">
+                                        <i class="fa fa-times-circle-o"></i>
+                                        <span style="color: red;">{!! $errors->first('full_name'); !!}</span>
+                                    </label>
+                                @endif
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="tk-block">
                                         <label>Số điện thoại (*)</label>
-                                        <input type="text" name="phone" required placeholder="Số điện thoại">
+                                        <input type="text" name="phone"  placeholder="Số điện thoại">
+                                        @if ($errors->first('phone')!='')
+                                            <label class="control-label" for="inputError">
+                                                <i class="fa fa-times-circle-o"></i>
+                                                <span style="color: red;">{!! $errors->first('phone'); !!}</span>
+                                            </label>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="tk-block">
                                         <label>Email (*)</label>
-                                        <input type="email" name="email" required placeholder="Email công ty">
+                                        <input type="email" name="email"  placeholder="Email công ty">
+                                        @if ($errors->first('email')!='')
+                                            <label class="control-label" for="inputError">
+                                                <i class="fa fa-times-circle-o"></i>
+                                                <span style="color: red;">{!! $errors->first('email'); !!}</span>
+                                            </label>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -79,27 +97,45 @@
                                 <div class="col-md-6">
                                     <div class="tk-block">
                                         <label>Tỉnh/Tp (*)</label>
-                                        <select name="province_id" required  id="province_id">
+                                        <select name="province_id"   id="province_id">
                                         <option value="">Tỉnh/Thành phố</option>
                                         @foreach($province as $pro)
                                             <option value="{{$pro->id}}">{{$pro->name}}</option>
                                         @endforeach
                                         </select>
                                     </div>
+                                    @if ($errors->first('province_id')!='')
+                                        <label class="control-label" for="inputError">
+                                            <i class="fa fa-times-circle-o"></i>
+                                            <span style="color: red;">{!! $errors->first('province_id'); !!}</span>
+                                        </label>
+                                    @endif
                                 </div>
                                 <div class="col-md-6">
                                     <div class="tk-block">
                                         <label>Quận/Huyện</label>
-                                        <select name="district_id" required id="district_id">
+                                        <select name="district_id"  id="district_id">
                                             <option value="">Quận/Huyện</option>
 
                                         </select>
                                     </div>
+                                    @if ($errors->first('district_id')!='')
+                                        <label class="control-label" for="inputError">
+                                            <i class="fa fa-times-circle-o"></i>
+                                            <span style="color: red;">{!! $errors->first('district_id'); !!}</span>
+                                        </label>
+                                    @endif
                                 </div>
                             </div>
                             <div class="tk-block">
                                 <label>Địa chỉ (*)</label>
-                                <input type="text" name="address" required placeholder="Ghi rõ số nhà, ngõ ngách, đường phố, phường xã.">
+                                <input type="text" name="address"  placeholder="Ghi rõ số nhà, ngõ ngách, đường phố, phường xã.">
+                                 @if ($errors->first('address')!='')
+                                    <label class="control-label" for="inputError">
+                                        <i class="fa fa-times-circle-o"></i>
+                                        <span style="color: red;">{!! $errors->first('address'); !!}</span>
+                                    </label>
+                                @endif
                             </div>
                             <div class="tk-block">
                                 <label>Website</label>
@@ -127,7 +163,7 @@
                                 <label class="input-title">Giấy phép kinh doanh (*)</label>
                                 <p class="p-ita">Vui lòng đính kèm bản scan giấy đăng ký kinh doanh ngoài.</p>
                                 <label class="upload-image text-center">
-                                    <input type="file" name="business_license" required>
+                                    <input type="file" name="business_license">
                                     <div class="flex-center-center">
                                         <i class="fa fa-cloud-upload"></i>
                                         <div class="file-txt">

@@ -37,13 +37,7 @@
                                     <td>{{$item->name}}</td>
                                     <td><img src="{{asset($item->image)}}" style="width:150px" alt=""></td>
                                     <td>
-                                        <?php  $parent = DB::table('categories')->where('id', $item->category_id)->first();
-                                        ?>
-                                        @if(!empty($parent))
-                                            {{ $parent->name }}
-                                        @else
-                                            {{ 'None' }}
-                                        @endif
+                                       {{@$item->category->name}}
                                     </td>
                                     <td>
                                         <a class="btn btn-warning" style="margin-right: 5px;" href="{{ route('admin.product.edit', $item->id) }}">

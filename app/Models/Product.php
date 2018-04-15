@@ -24,6 +24,11 @@ class Product extends AbstractModel
         'description',
         'keyword'
     ];
+    
+    public function category()
+    {
+        return $this->belongsTo('App\Models\Category', 'category_id', 'id');
+    }
     /*
      * get all product orderBy('id', 'desc')
      */
