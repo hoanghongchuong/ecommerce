@@ -37,7 +37,7 @@
                 <td>{{ $key+1 }}</td>
                 <td>{{$item->name}}</td>  
                 <td>
-                  <?php $province = DB::table('province')->where('id',$item->cate_id)->first(); ?>
+                  <?php $province = DB::table('provinces')->where('id',$item->cate_id)->first(); ?>
                   {{$province->name}}
                   
                 </td>          
