@@ -40,7 +40,6 @@ class RegisterStoreController extends Controller
             'district_id' => 'required',
             'address' => 'required',
             'business_license' => 'required',
-            
 
         ]);
         $data = $req->only($this->Store->getFieldList());
@@ -50,6 +49,12 @@ class RegisterStoreController extends Controller
             $data['business_license'] = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('uploads/store'), $data['business_license']);
             $data['business_license'] = 'uploads/store/' . $data['business_license'];
+        }
+        if ($req->hasFile('registration_certificate')) {
+            $image         = $req->file('registration_certificate');
+            $data['registration_certificate'] = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('uploads/store'), $data['registration_certificate']);
+            $data['registration_certificate'] = 'uploads/store/' . $data['registration_certificate'];
         }
         $this->Store->fill($data)->save();
         return view('front.store.regissucess');
@@ -79,5 +84,11 @@ class RegisterStoreController extends Controller
             return redirect()->back()->with('message','Email hoặc password không chính xác');
         }
 
+    }
+
+    public function logout()
+    {
+        Auth::guard('is_store')->logout();
+        return redirect()->route('store.login');
     }
 }

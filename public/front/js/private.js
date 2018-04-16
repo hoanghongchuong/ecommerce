@@ -67,7 +67,7 @@ jQuery(function ($) {
         margin: 0,
         dots: false,
         nav: true,
-        navText: ["<img src='images/icon/i-left.png'>","<img src='images/icon/i-right.png'>"],
+        navText: ["<img src='/front/images/icon/i-left.png'>","<img src='/front/images/icon/i-right.png'>"],
         responsive:{
             0:  { items:2 },
             480:{ items:3 },
@@ -124,7 +124,7 @@ jQuery(function ($) {
                 slideBy: slidesPerPage, //alternatively you can slide by 1, this way the active slide will stick to the first item in the second carousel
                 margin: 10,
                 nav: true,
-                navText: ["<img src='images/icon/prev-3.png'>", "<img src='images/icon/next-3.png'>"],
+                navText: ["<img src='/front/images/icon/prev-3.png'>", "<img src='/front/images/icon/next-3.png'>"],
                 responsiveRefreshRate: 100,
                 responsive: {
                     0: {
@@ -326,5 +326,10 @@ jQuery(function ($) {
                 }
             });
         });
+
+        CKEDITOR.replace('contentProduct1' );
+        CKEDITOR.replace('contentProduct2' );
+
+
     });
 });

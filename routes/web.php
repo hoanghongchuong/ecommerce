@@ -21,11 +21,17 @@ Route::get('/', 'Front\HomeController@index')->name('home.index');
 Route::get('register/store', 'Front\RegisterStoreController@register')->name('store.register');
 Route::post('register/store', 'Front\RegisterStoreController@postRegister')->name('store.postRegister');
 Route::any('store/login', 'Front\RegisterStoreController@login')->name('store.login');
-
+Route::get('store/logout', 'Front\RegisterStoreController@logout')->name('store.logout');
 Route::get('ajax/province', 'Front\HomeController@loadDistrictByProvince')->name('loadDistrictByProvince');
 
 Route::group(['middleware' => 'is_store', 'prefix' => 'store'], function(){
     Route::get('/','Front\StoreController@index')->name('store.index');
+    Route::get('detail/{id}', 'Front\StoreController@detailStore')->name('detailStore');
+
+    Route::group(['prefix' => 'product'], function(){
+        Route::get('/', 'Front\StoreController@listProduct')->name('listProduct');
+        Route::any('create', 'Front\StoreController@create')->name('store.product.getCreate');
+    });
 });
 
 

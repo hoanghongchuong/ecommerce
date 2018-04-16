@@ -43,11 +43,11 @@ class ProductController extends Controller
             'image' => 'nullable|image|max:2048',
         ]);
         $data = $req->only($this->Product->getFieldList());
-        $data['author'] = $req->admin->id;
+        $data['admin_id'] = $req->admin->id;
         $data['slug'] = isset($req->slug) ? $req->slug : str_slug($req->name);
         $data['is_highlight'] = isset($data['is_highlight']) ? true : false;
-        $data['active']    = isset($data['active']) ? true : false;
-
+//        $data['active']    = isset($data['active']) ? true : false;
+        $data['active'] = 1;
         if ($req->hasFile('image')) {
             $image         = $req->file('image');
             $data['image'] = time() . '.' . $image->getClientOriginalExtension();

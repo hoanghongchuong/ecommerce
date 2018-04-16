@@ -226,29 +226,29 @@
                                 <label>Sản phẩm độc quyền? Đặc thù? Hay thế mạnh?</label>
                                 <input type="text" name="special_product" placeholder="">
                             </div>
-                            <div class="tk-block">
-                                <label>Mã xác nhận</label>
-                                <div class="flex-center">
-                                    <span class="mgr-20"><img src="{{ asset('/front/images/banner/captcha.jpg')}}" alt="" title=""> </span>
-                                    <input type="text" placeholder="">
-                                </div>
-                            </div>
+                            {{--<div class="tk-block">--}}
+                                {{--<label>Mã xác nhận</label>--}}
+                                {{--<div class="flex-center">--}}
+                                    {{--<span class="mgr-20"><img src="{{ asset('/front/images/banner/captcha.jpg')}}" alt="" title=""> </span>--}}
+                                    {{--<input type="text" placeholder="">--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
                             <div class="tk-btn">
                                 <button type="submit"><span>ĐĂNG KÝ</span></button>
                             </div>
                         </div>
                     </div>
                 </section>
-                <h3>Hoàn thành</h3>
-                <section class="register-4">
-                    <div class="tk-block-success flex-center-center">
-                        <span class="mgr-20"><img src="{{ asset('/front/images/icon/i-tk-success.png')}}" alt="" title=""> </span>
-                        <div class="tk-txt">
-                            <p class="font-weight-bold">Đăng ký thành công !</p>
-                            <p class="mg-10">Bạn đã đăng ký thành công tài khoản “Bán hàng cùng Fbuy”. Vui lòng kiểm tra email để xác thực tài khoản và nhận thông tin tài khoản</p>
-                        </div>
-                    </div>
-                </section>
+                {{--<h3>Hoàn thành</h3>--}}
+                {{--<section class="register-4">--}}
+                    {{--<div class="tk-block-success flex-center-center">--}}
+                        {{--<span class="mgr-20"><img src="{{ asset('/front/images/icon/i-tk-success.png')}}" alt="" title=""> </span>--}}
+                        {{--<div class="tk-txt">--}}
+                            {{--<p class="font-weight-bold">Đăng ký thành công !</p>--}}
+                            {{--<p class="mg-10">Bạn đã đăng ký thành công tài khoản “Bán hàng cùng Fbuy”. Vui lòng kiểm tra email để xác thực tài khoản và nhận thông tin tài khoản</p>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</section>--}}
             </div>
         </form>
         <!--<div class="link-page">-->
@@ -286,7 +286,12 @@
     form.children("div").steps({
         headerTag: "h3",
         bodyTag: "section",
-        transitionEffect: "slideLeft"
+        transitionEffect: "slideLeft",
+        // onStepChanged: function (event, current, next) {
+        //     if (current > 1) {
+        //         $('.actions > ul > li').attr('style', 'display:none');
+        //     }
+        // }
     });
 </script>
 <script>

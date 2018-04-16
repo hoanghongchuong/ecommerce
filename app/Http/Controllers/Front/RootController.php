@@ -5,15 +5,19 @@ namespace App\Http\Controllers\Front;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Admin;
+use App\Models\Store;
 //use App\Http\Controllers\Controller;
 
 class RootController extends AbstractBaseController
 {
 
-    public function __construct(Category $category, Product $product)
+    public function __construct(Category $category, Product $product, Admin $admin, Store $store)
     {
         $this->Category = $category;
         $this->Product = $product;
+        $this->Store = $store;
+        $this->Admin = $admin;
     }
     public function index($slug)
     {
@@ -42,7 +46,10 @@ class RootController extends AbstractBaseController
         $last = array_pop($array_string);
         $id = substr($last, 1);
         $product = $this->Product->getDetail($id);
+        $albums = $this->Product->getAlbum($product->id);
         $category = $this->Category->getOneCategoryById($product->category_id);
-        return view('front.product.detail', compact('product', 'category'));
+        $admin = $this->Admin->where('id', $product->admin_id)->first();
+        $store = $this->Admin->where('id', $product->store_id)->first();
+        return view('front.product.detail', compact('product', 'category', 'albums','store','admin'));
     }
 }

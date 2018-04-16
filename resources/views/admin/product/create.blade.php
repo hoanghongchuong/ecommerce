@@ -91,6 +91,7 @@
                                                     {{ @$product->des }}
                                                 </textarea>
                                             </div>
+
                                         </div>
 
                                     </div>

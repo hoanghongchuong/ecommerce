@@ -15,7 +15,7 @@
                         </div>
                     </div>
                 </li>
-                <li><a href="{{ route('store.register') }}" title="">BÁN HÀNG CÙNG FBUY</a> </li>
+                <li><a href="{{ route('store.login') }}" title="">BÁN HÀNG CÙNG FBUY</a> </li>
             </ul>
         </div>
     </section>

@@ -17,28 +17,32 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div id="sync1" class="product-image-slider owl-carousel owl-theme not-dqowl">
-                                    <a href="{{ asset('/front/images/product/product-main.jpg')}}" data-fancybox="images"><img src="{{ asset('/front/images/product/product-main.jpg')}}" alt="" title=""> </a>
-                                    <a href="{{ asset('/front/images/product/product-main-2.jpg')}}" data-fancybox="images"><img src="{{ asset('/front/images/product/product-main-2.jpg')}}" alt="" title=""> </a>
-                                    <a href="{{ asset('/front/images/product/product-main-3.jpg')}}" data-fancybox="images"><img src="{{ asset('/front/images/product/product-main-3.jpg')}}" alt="" title=""> </a>
-                                    <a href="{{ asset('/front/images/product/product-main-4.jpg')}}" data-fancybox="images"><img src="{{ asset('/front/images/product/product-main-4.jpg')}}" alt="" title=""> </a>
+                                    @if($albums)
+                                    @foreach($albums as $album)
+                                    <a href="{{ asset($album->image)}}" data-fancybox="images">
+                                        <img src="{{ asset($album->image)}}" alt="" title="">
+                                    </a>
+                                    @endforeach
+                                    @else
+                                        <a href="{{ asset($product->image)}}" data-fancybox="images">
+                                            <img src="{{ asset($product->image)}}" alt="" title="">
+                                        </a>
+                                    @endif
                                 </div>
                                 <div id="sync2" class="slider-general owl-carousel  not-dqowl mgt-15">
+                                @if($albums)
+                                    @foreach($albums as $album)
                                     <div class="item">
-                                        <a href="" title="" class=""><img src="{{ asset('/front/images/product/product-thumb-1.jpg')}}" alt="" title="">
+                                        <a href="" title="" class=""><img src="{{ asset($album->image)}}" alt="" title="">
                                         </a>
                                     </div>
+                                    @endforeach
+                                @else
                                     <div class="item">
-                                        <a href="" title="" class=""><img src="{{ asset('/front/images/product/product-thumb-2.jpg')}}" alt="" title="">
+                                        <a href="" title="" class=""><img src="{{ asset($product->image)}}" alt="" title="">
                                         </a>
                                     </div>
-                                    <div class="item">
-                                        <a href="" title="" class=""><img src="{{ asset('/front/images/product/product-thumb-3.jpg')}}" alt="" title="">
-                                        </a>
-                                    </div>
-                                    <div class="item">
-                                        <a href="" title="" class=""><img src="{{ asset('/front/images/product/product-thumb-4.jpg')}}" alt="" title="">
-                                        </a>
-                                    </div>
+                                @endif
                                 </div>
                                 <div class="action-facebook">
                                     <div class="facebook-icon"><img src="{{ asset('/front/images/icon/i-bluan.png')}}"> </div>
@@ -64,7 +68,7 @@
                                                 <span>Còn hàng</span>
                                             </div>
                                             <div class="outstock stock" style="display: none">
-                                                <span><img src="images/icon/i-outstock.png" alt="" title=""> </span>
+                                                <span><img src="{{ asset('front/images/icon/i-outstock.png')}}" alt="" title=""> </span>
                                                 <span>Hết hàng</span>
                                             </div>
                                         </div>
@@ -81,15 +85,8 @@
                                         </div>
                                     </div>
                                     <div class="product-shortdesc">
-                                        <ul>
-                                            <li>Trọng lượng: 300Gr </li>
-                                            <li>Năm sản xuất: Tháng 2 năm 2018 </li>
-                                            <li>Hạn sử dụng: 6 tháng kể từ ngày sản xuất </li>
-                                            <li>Thương hiệu: Bảo Minh cake </li>
-                                            <li>Chất liệu: Sầu riêng, bột mì, đường, sữa,... </li>
-                                            <li>Sử dụng: Ăn ngay </li>
-                                        </ul>
-                                        <p class="note-promo">Tặng 1 hộp kẹo dừa Bến Tre khi mua sản phẩm nhân dịp năm mới 2018</p>
+                                        {!! $product->des !!}
+                                        {{--<p class="note-promo">Tặng 1 hộp kẹo dừa Bến Tre khi mua sản phẩm nhân dịp năm mới 2018</p>--}}
                                     </div>
                                 </div>
                             </div>
@@ -106,7 +103,11 @@
                                 </div>
                                 <div class="product-time">
                                     <p>Được phát hành bởi</p>
-                                    <h5>Bảo Minh Cake</h5>
+                                    @if($admin)
+                                    <h5>{{ $admin->full_name }}</h5>
+                                    @else
+                                    <h5>{{ $store->full_name }}</h5>
+                                    @endif
                                     <div class="expiry">
                                         <div class="expiry-1">
                                             <p>Đánh giá</p>
@@ -183,10 +184,7 @@
                             <div class="product-left">
                                 <h6 class="title-bold">Thông tin sản phẩm</h6>
                                 <div class="desc">
-                                    <p>Bánh pía là một trong những đặc sản của Sóc Trăng, do người Hoa di cư vào miền Nam sáng tạo ra. Bánh pía được làm bằng bột mì, sầu riêng, lòng đỏ trứng. Đôi khi bánh pía còn được gọi là bánh bía, bánh lột da.</p>
-                                    <p class="text-center"><img src="images/product/product-detail.jpg" alt="" title=""> </p>
-                                    <p>Bánh pía là một trong những đặc sản của Sóc Trăng, do người Hoa di cư vào miền Nam sáng tạo ra. Bánh pía được làm bằng bột mì, sầu riêng, lòng đỏ trứng. Đôi khi bánh pía còn được gọi là bánh bía, bánh lột da.</p>
-                                    <p>Bánh pía là một trong những đặc sản của Sóc Trăng, do người Hoa di cư vào miền Nam sáng tạo ra. Bánh pía được làm bằng bột mì, sầu riêng, lòng đỏ trứng. Đôi khi bánh pía còn được gọi là bánh bía, bánh lột da.</p>
+                                    {!! $product->content !!}
                                     <div class="read-more text-center"><a href="" title="">Xem thêm</a> </div>
                                 </div>
                             </div>
