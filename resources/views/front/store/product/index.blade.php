@@ -57,22 +57,23 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @foreach($products as $product)    
                         <tr>
                             <td>1</td>
                             <td>
                                 <div class="flex cart-flex">
-                                    <span><img src="images/product/cart-pro-2.png" alt="" title=""> </span>
+                                    <span><img src="{{ asset($product->image) }}" alt="" title=""> </span>
                                     <div class="product-ac text-left">
-                                        <p><a href="" title="">Kẹo lạc Bảo Minh - Đặc sản xứ Thanh</a> </p>
+                                        <p><a href="" title="">{{$product->name}}</a> </p>
                                     </div>
                                 </div>
                             </td>
                             <td><span class="font-weight-bold">#FB-3025-32018</span></td>
-                            <td>45.000 đ</td>
-                            <td>50.000 đ</td>
+                            <td>{{number_format($product->price_old)}} đ</td>
+                            <td>{{number_format($product->price)}} đ</td>
                             <td><span class="txt-blue">Còn hàng</span></td>
                             <td><img src="images/icon/i-hidden.png" alt="" title=""> </td>
-                            <td>12-03-2018</td>
+                            <td>{{date('d/m/Y', strtotime($product->created_at))}}</td>
                             <td>
                                 <div class="manage-action">
                                     <a href="" title="">Quản lý <i class="fa fa-caret-down"></i> </a>
@@ -88,117 +89,7 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>
-                                <div class="flex cart-flex">
-                                    <span><img src="images/product/cart-pro-1.png" alt="" title=""> </span>
-                                    <div class="product-ac text-left">
-                                        <p><a href="" title="">Kẹo lạc Bảo Minh - Đặc sản xứ Thanh</a> </p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td><span class="font-weight-bold">#FB-3025-32018</span></td>
-                            <td>45.000 đ</td>
-                            <td>50.000 đ</td>
-                            <td><span class="txt-blue">Còn hàng</span></td>
-                            <td><img src="images/icon/i-hidden.png" alt="" title=""> </td>
-                            <td>12-03-2018</td>
-                            <td>
-                                <div class="manage-action">
-                                    <a href="" title="">Quản lý <i class="fa fa-caret-down"></i> </a>
-                                    <div class="user-abs">
-                                        <div class="block-shadow">
-                                            <ul>
-                                                <li><a href="" title="">Sửa thông tin</a> </li>
-                                                <li><a href="" title="" data-toggle="modal" data-target="#delete-product">Xóa sản phẩm</a> </li>
-                                                <li><a href="" title="">Quản lý hình ảnh SP</a> </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>
-                                <div class="flex cart-flex">
-                                    <span><img src="images/product/cart-pro-1.png" alt="" title=""> </span>
-                                    <div class="product-ac text-left">
-                                        <p><a href="" title="">Bánh chả khay 130gr Bảo Minh</a> </p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td><span class="font-weight-bold">#FB-3025-32018</span></td>
-                            <td>45.000 đ</td>
-                            <td>50.000 đ</td>
-                            <td><span class="txt-blue">Còn hàng</span></td>
-                            <td>
-                                <div class="onoffswitch">
-                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
-                                    <label class="onoffswitch-label" for="myonoffswitch">
-                                        <span class="onoffswitch-inner"></span>
-                                        <span class="onoffswitch-switch"></span>
-                                    </label>
-                                    <p class="stt-check"></p>
-                                </div>
-                            </td>
-                            <td>12-03-2018</td>
-                            <td>
-                                <div class="manage-action">
-                                    <a href="" title="">Quản lý <i class="fa fa-caret-down"></i> </a>
-                                    <div class="user-abs">
-                                        <div class="block-shadow">
-                                            <ul>
-                                                <li><a href="" title="">Sửa thông tin</a> </li>
-                                                <li><a href="" title="" data-toggle="modal" data-target="#delete-product">Xóa sản phẩm</a> </li>
-                                                <li><a href="" title="">Quản lý hình ảnh SP</a> </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>
-                                <div class="flex cart-flex">
-                                    <span><img src="images/product/cart-pro-1.png" alt="" title=""> </span>
-                                    <div class="product-ac text-left">
-                                        <p><a href="" title="">Bánh chả khay 130gr Bảo Minh</a> </p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td><span class="font-weight-bold">#FB-3025-32018</span></td>
-                            <td>45.000 đ</td>
-                            <td>50.000 đ</td>
-                            <td><span class="txt-blue">Còn hàng</span></td>
-                            <td>
-                                <div class="onoffswitch">
-                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch-2" checked>
-                                    <label class="onoffswitch-label" for="myonoffswitch-2">
-                                        <span class="onoffswitch-inner"></span>
-                                        <span class="onoffswitch-switch"></span>
-                                    </label>
-                                    <p class="stt-check"></p>
-                                </div>
-                            </td>
-                            <td>12-03-2018</td>
-                            <td>
-                                <div class="manage-action">
-                                    <a href="" title="">Quản lý <i class="fa fa-caret-down"></i> </a>
-                                    <div class="user-abs">
-                                        <div class="block-shadow">
-                                            <ul>
-                                                <li><a href="" title="">Sửa thông tin</a> </li>
-                                                <li><a href="" title="" data-toggle="modal" data-target="#delete-product">Xóa sản phẩm</a> </li>
-                                                <li><a href="" title="">Quản lý hình ảnh SP</a> </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                        @endforeach
                         </tbody>
                     </table>
                     <div class="get-page">
@@ -229,48 +120,6 @@
                 </div>
             </div>
         </section>
-        <section class="method-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h6 class="text-uppercase">CÁCH THỨC THANH TOÁN</h6>
-                        <ul class="flex-center">
-                            <li><a href="" title=""><img src="images/product/payment-1.png" alt="" title=""> </a> </li>
-                            <li><a href="" title=""><img src="images/product/payment-2.png" alt="" title=""> </a> </li>
-                            <li><a href="" title=""><img src="images/product/payment-3.png" alt="" title=""> </a> </li>
-                            <li><a href="" title=""><img src="images/product/payment-4.png" alt="" title=""> </a> </li>
-                            <li><a href="" title=""><img src="images/product/payment-5.png" alt="" title=""> </a> </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-3">
-                        <h6 class="text-uppercase">DỊCH VỤ GIAO HÀNG</h6>
-                        <ul class="flex-center">
-                            <li><a href="" title=""><img src="images/product/transit-1.png" alt="" title=""> </a> </li>
-                            <li><a href="" title=""><img src="images/product/transit-2.png" alt="" title=""> </a> </li>
-                            <li><a href="" title=""><img src="images/product/transit-3.png" alt="" title=""> </a> </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-3 newsletter">
-                        <h6 class="text-uppercase">ĐĂNG KÝ NHẬN KHUYẾN MÃI</h6>
-                        <form>
-                            <button type="submit"><i class="fa fa-envelope-o"></i> </button>
-                            <input type="email" placeholder="Email của bạn">
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="tk-footer-nav tk-footer-mainnav">
-            <div class="container">
-                <div class="buy-category">
-                    <ul class="flex-center-center">
-                        <li><a href="" title="">Đăng ký bán hàng</a> </li>
-                        <li><a href="" title="">Giới thiệu về Fbuy.com.vn</a> </li>
-                        <li><a href="" title="">Điều khoản và điều kiện giao dịch</a> </li>
-                        <li><a href="" title="">Nội quy Sàn TMDT Fbuy</a> </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+        
     </main>
 @endsection

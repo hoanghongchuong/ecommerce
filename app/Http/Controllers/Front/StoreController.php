@@ -15,6 +15,7 @@ class StoreController extends AbstractBaseController
     }
     public function index()
     {
+
         return view('front.store.index');
     }
 
@@ -24,10 +25,11 @@ class StoreController extends AbstractBaseController
         return view('front.store.detail');
     }
 
-    public function listProduct()
+    public function listProduct(Request $req)
     {
-
-        return view('front.store.product.index');
+        $products = $this->Product->where('store_id', $req->is_store->id)->orderBy('id','desc')->get();
+        
+        return view('front.store.product.index', compact('products'));
     }
 
     public function create(Request $req, $id = null)
@@ -49,7 +51,12 @@ class StoreController extends AbstractBaseController
         $data = $req->only($this->Product->getFieldList());
         $data['store_id'] = $req->is_store->id;
         $data['slug'] = isset($req->slug) ? $req->slug : str_slug($req->name);
-//        dd($data);
+        if ($req->hasFile('image')) {
+            $image         = $req->file('image');
+            $data['image'] = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('uploads/products'), $data['image']);
+            $data['image'] = 'uploads/products/' . $data['image'];
+        }
         $this->Product->updateOrCreate(['id' => $id], $data);
 
         return view('front.store.product.success');
