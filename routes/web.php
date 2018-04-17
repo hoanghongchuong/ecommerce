@@ -34,11 +34,15 @@ Route::group(['middleware' => 'is_store', 'prefix' => 'store'], function(){
     });
 });
 
-
-//Route::get('{slug}', 'Front\ProductController@getProductByCate')->name('getProductByCate');
-//Route::get('{slug}', 'Front\ProductController@getDetailProduct')-> name('getDetailProduct');
-
-
+//giỏ hàng
+Route::get('gio-hang', 'Front\OrderController@getCart')->name('getCart');
+Route::post('add/cart', 'Front\OrderController@addCart')->name('addProductToCart');
+Route::post('update/cart', 'Front\OrderController@updateCart')->name('updateCart');
+Route::get('delete/cart/{id}', 'Front\OrderController@deleteCart')->name('deleteCart');
+Route::get('thanh-toan', 'Front\OrderController@payment')->name('payment');
+Route::post('payment/2', 'Front\OrderController@postUsername')->name('postUsername');
+Route::post('payment/3', 'Front\OrderController@postInfor')->name('postInfor');
+Route::post('postOrder', 'Front\OrderController@postOrder')->name('postOrder');
 //auth route
 Route::any('/login', 'Admin\AuthController@login')->name('admin.login');
 Route::post('logout', 'Admin\AuthController@logout')->name('admin.logout');

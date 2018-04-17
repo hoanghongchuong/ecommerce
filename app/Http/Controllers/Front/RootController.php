@@ -49,7 +49,7 @@ class RootController extends AbstractBaseController
         $albums = $this->Product->getAlbum($product->id);
         $category = $this->Category->getOneCategoryById($product->category_id);
         $admin = $this->Admin->where('id', $product->admin_id)->first();
-        $store = $this->Admin->where('id', $product->store_id)->first();
+        $store = $this->Store->where('id', $product->store_id)->first();
         return view('front.product.detail', compact('product', 'category', 'albums','store','admin'));
     }
 }

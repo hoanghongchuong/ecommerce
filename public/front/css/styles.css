@@ -3281,6 +3281,10 @@ select .fa-star {
 #step-register .wizard > .actions li:nth-child(3) a:active{
     background: #ff9000;
 }
+.btn-updatecart{
+    /*float:right;*/
+    padding: 10px 10px;
+}
 /*#step-register .wizard > .actions li:nth-child(1) a,*/
 /*#step-register .wizard > .actions li:nth-child(1) a:hover,*/
 /*#step-register .wizard > .actions li:nth-child(1) a:active  {*/

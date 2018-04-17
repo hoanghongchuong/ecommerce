@@ -91,16 +91,22 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="product-action">
-                                    <p><strong>Số lượng</strong></p>
-                                    <div class="action-number">
-                                        <span class="fa fa-minus minus" aria-hidden="true"></span>
-                                        <input  type="text" value="1" class="qty">
-                                        <span class="fa fa-plus add" aria-hidden="true"></span>
+                                <form action="{{ route('addProductToCart') }}" class="cart p-qty-frm" method="post">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <div class="product-action">
+                                        <p><strong>Số lượng</strong></p>
+                                        <div class="action-number">
+                                            <span class="fa fa-minus minus" aria-hidden="true"></span>
+                                            <input type="number" name="product_numb" class="qty" min="1" required="required" value="1" />
+                                            <span class="fa fa-plus add" aria-hidden="true"></span>
+                                        </div>
+                                        <a href="javascript:;" title="" class="bg-blue addCart-button">THÊM VÀO GIỎ</a>
+
+                                        {{--<a href="gio-hang.html" title="" class="bg-blue buyNow-button">MUA NGAY</a>--}}
+                                        <button type="submit" class="bg-blue buyNow-button form-control">MUA NGAY</button>
                                     </div>
-                                    <a href="" title="" class="bg-blue addCart-button">THÊM VÀO GIỎ</a>
-                                    <a href="gio-hang.html" title="" class="bg-blue buyNow-button">MUA NGAY</a>
-                                </div>
+                                </form>
                                 <div class="product-time">
                                     <p>Được phát hành bởi</p>
                                     @if($admin)
