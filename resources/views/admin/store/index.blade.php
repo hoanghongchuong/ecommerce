@@ -24,30 +24,29 @@
                             <thead>
                             <tr>
                                 <th>STT</th>
-                                <th>Tên sản phẩm</th>
-                                <th>Ảnh</th>
-                                <th>Danh mục cha</th>
+                                <th>Tên cửa hàng</th>
+                                <th>Địa chỉ</th>
+                                <th>Ngày đăng ký</th>
                                 <th>Hành động</th>
                             </tr>
                             </thead>
                             <tbody>
-
+                            @foreach($store as $k=>$item)
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td><img src="" style="width:150px" alt=""></td>
+                                    <td>{{ $k+1 }}</td>
+                                    <td>{{ $item->full_name }}</td>
+                                    <td>{{ $item->address }}</td>
+                                    <td>{{ date('d/m/Y', strtotime($item->created_at)) }}</td>
                                     <td>
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-warning" style="margin-right: 5px;" href="">
-                                            <i class="fa fa-edit"> Sửa</i>
+                                        <a class="btn btn-warning" style="margin-right: 5px;" href="{{ route('admin.store.detail', $item->id) }}">
+                                            <i class="fa fa-edit"> Chi tiết</i>
                                         </a>
-                                        <a class="btn btn-danger" href="">
+                                        <a class="btn btn-danger" href="{{ route('admin.store.delete', $item->id) }}">
                                             <i class="fa fa-trash-o"> Xóa</i>
                                         </a>
                                     </td>
                                 </tr>
-
+                            @endforeach
                             </tbody>
                         </table>
                     </div><!-- /.box-body -->

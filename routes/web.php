@@ -71,6 +71,8 @@ Route::group(['middleware' => 'admin', 'prefix' => 'backend'], function (){
     Route::group(['prefix' => 'store'], function (){
         Route::get('/','Admin\StoreController@index')->name('admin.store.index');
         Route::get('edit/{id}','Admin\StoreController@detailStore')->name('admin.store.detail');
+
+        Route::get('delete/{id}', 'Admin\StoreController@delete')->name('admin.store.delete');
     });
 
     /*
