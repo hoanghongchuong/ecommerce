@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Product;
-use App\Models\OrderStore;
+use App\Models\OrderDetail;
 use Cart;
 
 class OrderController extends Controller
@@ -46,7 +46,6 @@ class OrderController extends Controller
      */
     public function addCart(Request $req)
     {
-//        session_start();
 
         $data = $req->only('product_id','product_numb');
         $product = $this->Product->getDetail($data['product_id']);
@@ -105,7 +104,6 @@ class OrderController extends Controller
         $data = $req->all();
         session()->put('info', $data);
         $cart = Cart::content();
-//        dd($cart);
         $total = $this->getTotalPrice();
         return view('front.order.payment3', compact('data', 'cart','total'));
     }
@@ -113,8 +111,8 @@ class OrderController extends Controller
     public function postOrder(Request $req)
     {
         $cart = Cart::Content();
-//        dd($cart);
         $info = $req->session()->get('info');
+        // dd($infor);
         $order = new Order;
         $order->full_name = $info['full_name'];
         $order->phone = $info['phone'];
@@ -125,46 +123,23 @@ class OrderController extends Controller
         $total = $this->getTotalPrice();
         $order->payment_method = $req->payment_method;
         $order->total = $total;
-        $detail =[];
-        foreach ($cart as $key) {
-            $detail[] = [
-                'product_name' => $key->name,
-                'product_numb' => $key->qty,
-                'product_price' => $key->price,
-                'product_img' => $key->options->image,
-                'product_code' => $key->options->code,
-                'admin_id' => $key->options->admin_id,
-                'store_id' => $key->options->store_id,
-                'status' => 0
-            ];
-        }
-        $order->detail = json_encode($detail);
-//        dd($order);
+        $order->status = 0;
         if($total > 0){
             $order->save();
-//            $store_detail = [];
-//            $orderStore = new OrderStore();
-//            foreach ($cart as $key) {
-//                if(empty($store_detail)){
-//                    $store_detail[] = [
-//                        'store_id' => $key->options->store_id,
-//                        'detail' => [
-//                            'product_id' => $key->id,
-//                            'qty' => $key->qty,
-//                            'price' => $key->price
-//                        ]
-//                    ];
-//                }else{
-//                    foreach($store_detail as $item){
-//                        if($item->store_id == $key->options->store_id){
-//
-//                        }else{
-//
-//                        }
-//                    }
-//                }
-//
-//            }
+            foreach($cart as $key){
+                $product = $this->Product->where('id', $key->id)->first();
+                // dd($product->admin_id);
+                $orderDetail = new OrderDetail;
+                $orderDetail->product_id = $key->id;
+                $orderDetail->order_id = $order->id;
+                $orderDetail->admin_id = $product->admin_id;
+                $orderDetail->store_id = $product->store_id;
+                $orderDetail->price = $key->price;
+                $orderDetail->qty = $key->qty;
+                $orderDetail->totalprice = $key->price * $key->qty;
+                $orderDetail->status = 0;   
+                $orderDetail->save(); 
+            }
 
         }else{
             echo "<script type='text/javascript'>
@@ -177,6 +152,6 @@ class OrderController extends Controller
         return redirect()->route('post.success');
     }
     public function success(){
-        return view('front.ordersucess');
+        return view('front.store.ordersucess');
     }
 }
