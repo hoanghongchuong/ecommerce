@@ -6,12 +6,14 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Order;
 class StoreController extends AbstractBaseController
 {
-    public function __construct(Category $category, Product $product)
+    public function __construct(Category $category, Product $product, Order $order)
     {
         $this->Category = $category;
         $this->Product = $product;
+        $this->Order = $order;
     }
     public function index()
     {
@@ -61,13 +63,14 @@ class StoreController extends AbstractBaseController
 
         return view('front.store.product.success');
     }
-
-    public function postCreate(Request $req)
+    /*
+     * list order
+     * @return view
+     */
+    public function order(Request $req)
     {
-        $data = $req->only($this->Product->getFieldList());
-        $data['store_id'] = $req->is_store->id;
-        $data['slug'] = isset($req->slug) ? $req->slug : str_slug($req->name);
+        $orders = $this->Order->all();
 
-        dd($data);
+        return view('front.store.order.index');
     }
 }

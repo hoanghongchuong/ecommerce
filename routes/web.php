@@ -32,6 +32,9 @@ Route::group(['middleware' => 'is_store', 'prefix' => 'store'], function(){
         Route::get('/', 'Front\StoreController@listProduct')->name('listProduct');
         Route::any('create', 'Front\StoreController@create')->name('store.product.getCreate');
     });
+    Route::group(['prefix' => 'order'], function (){
+        Route::get('/', 'Front\StoreController@order')->name('store.order.index');
+    });
 });
 
 //giỏ hàng
@@ -43,6 +46,7 @@ Route::get('thanh-toan', 'Front\OrderController@payment')->name('payment');
 Route::post('payment/2', 'Front\OrderController@postUsername')->name('postUsername');
 Route::post('payment/3', 'Front\OrderController@postInfor')->name('postInfor');
 Route::post('postOrder', 'Front\OrderController@postOrder')->name('postOrder');
+Route::get('post/success', 'Front\Ordercontroller@success')->name('post.success');
 //auth route
 Route::any('/login', 'Admin\AuthController@login')->name('admin.login');
 Route::post('logout', 'Admin\AuthController@logout')->name('admin.logout');
@@ -77,6 +81,13 @@ Route::group(['middleware' => 'admin', 'prefix' => 'backend'], function (){
         Route::get('edit/{id}','Admin\StoreController@detailStore')->name('admin.store.detail');
 
         Route::get('delete/{id}', 'Admin\StoreController@delete')->name('admin.store.delete');
+    });
+
+    Route::group(['prefix' => 'order'], function() {
+        Route::get('/', 'Admin\OrderController@index')->name('admin.order.index');
+        Route::get('detail/{id}', 'Admin\OrderController@detail')->name('admin.order.detail');
+
+        Route::get('delete/{id}', 'Admin\OrderController@delete')->name('admin.order.delete');
     });
 
     /*

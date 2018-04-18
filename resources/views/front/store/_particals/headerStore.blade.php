@@ -34,8 +34,8 @@
                                 </div>
                             </div>
                         </li>
-                        <li><a href="TK-danh-sach-don.html" title="">Đơn hàng</a> </li>
-                        <li><a href="TK-san-pham-khuyen-mai.html" title="">Khuyến mãi</a> </li>
+                        <li><a href="{{ route('store.order.index') }}" title="">Đơn hàng</a> </li>
+                        <li><a href="#" title="">Khuyến mãi</a> </li>
                         <li>
                             <a href="" title="">Tài chính <i class="fa fa-caret-down"></i></a>
                             <div class="user-abs">

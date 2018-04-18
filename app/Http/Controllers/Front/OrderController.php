@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\OrderStore;
 use Cart;
+
 class OrderController extends Controller
 {
     public function __construct(Order $order, Product $product)
@@ -34,6 +36,7 @@ class OrderController extends Controller
     public function getCart()
     {
         $cart = Cart::content();
+//        dd($cart);
         $total = $this->getTotalPrice();
         return view('front.order.index', compact('cart','total'));
     }
@@ -61,6 +64,7 @@ class OrderController extends Controller
                 'slug' => $product->slug,
                 'store_id' => $product->store_id,
                 'admin_id' => $product->admin_id,
+
             )
         ));
         return redirect()->route('getCart');
@@ -117,8 +121,9 @@ class OrderController extends Controller
         $order->email = $info['email'];
         $order->address = $info['address'];
         $order->content = $info['content'];
-//        $order->store_id = $req->is_store->id;
+        $order->code = str_random(6);
         $total = $this->getTotalPrice();
+        $order->payment_method = $req->payment_method;
         $order->total = $total;
         $detail =[];
         foreach ($cart as $key) {
@@ -126,16 +131,41 @@ class OrderController extends Controller
                 'product_name' => $key->name,
                 'product_numb' => $key->qty,
                 'product_price' => $key->price,
-                'product_img' => $key->options->photo,
+                'product_img' => $key->options->image,
                 'product_code' => $key->options->code,
                 'admin_id' => $key->options->admin_id,
                 'store_id' => $key->options->store_id,
+                'status' => 0
             ];
         }
         $order->detail = json_encode($detail);
-        dd($order);
+//        dd($order);
         if($total > 0){
             $order->save();
+//            $store_detail = [];
+//            $orderStore = new OrderStore();
+//            foreach ($cart as $key) {
+//                if(empty($store_detail)){
+//                    $store_detail[] = [
+//                        'store_id' => $key->options->store_id,
+//                        'detail' => [
+//                            'product_id' => $key->id,
+//                            'qty' => $key->qty,
+//                            'price' => $key->price
+//                        ]
+//                    ];
+//                }else{
+//                    foreach($store_detail as $item){
+//                        if($item->store_id == $key->options->store_id){
+//
+//                        }else{
+//
+//                        }
+//                    }
+//                }
+//
+//            }
+
         }else{
             echo "<script type='text/javascript'>
 				alert('Giỏ hàng của bạn rỗng!');
@@ -144,5 +174,9 @@ class OrderController extends Controller
         }
         Cart::destroy();
 
+        return redirect()->route('post.success');
+    }
+    public function success(){
+        return view('front.ordersucess');
     }
 }

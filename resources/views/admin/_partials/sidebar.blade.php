@@ -26,7 +26,8 @@
                     <li><a href="{{ route('admin.product.index') }}"><i class="fa fa-circle-o"></i><span>Sản phẩm</span></a></li>
                 </ul>
             </li>
-            <li><a href="{{ route('admin.store.index') }}"> <i class="fa fa-files-o"></i><span>Quản lý store</span></a></li>            
+            <li><a href="{{ route('admin.store.index') }}"> <i class="fa fa-files-o"></i><span>Quản lý store</span></a></li> 
+            <li><a href="{{ route('admin.order.index') }}"><i class="fa fa-shopping-cart"></i><span>Quản lý đơn hàng</span></a></li>
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-files-o"></i>
