@@ -38,32 +38,23 @@
                                     <td>{{ $order->code }}</td>
                                     <td>{{ $order->full_name }}</td>
                                     <td>{{ number_format($order->total) }}</td>
-                                    <td>{{ $order->payment_method }}</td>
+                                    <td>
+                                        <?php
+                                        if($order->payment_method == 1) echo"Thanh toán khi giao hàng";
+                                        if($order->payment_method == 2) echo"Chuyển khoản qua ngân hàng";
+                                        if($order->payment_method == 3) echo"Chuyển khoản online";
+                                        ?>
+                                    </td>
                                     <td>{{ date('d/m/Y - H:i:s', strtotime($order->created_at)) }}</td>
                                     <td>{{ $order->content }}</td>
                                     <td>
-                                        <?php
-                                        switch ($order->status) {
-                                            case '0':
-                                                echo "Mới đặt";
-                                                break;
-                                            case '1':
-                                                echo "Xác nhận";
-                                                break;
-                                            case '2':
-                                                echo "Đang giao hàng";
-                                                break;
-                                            case '3':
-                                                echo "Hoàn thành";
-                                                break;
-                                            case '4':
-                                                echo "Hủy";
-                                                break;
-                                            default:
-                                                echo "Mới đặt";
-                                                break;
-                                        }
-                                        ?>
+                                        <select name="" id="status_order" data-id="{{ $order->id }}" class="form-control" style="text-align:center">
+                                            <option value="1" @if($order->status ==1) selected @endif>Mới đặt</option>
+                                            <option value="2"  @if($order->status ==2) selected @endif>Xác nhận</option>
+                                            <option value="3" @if($order->status ==3) selected @endif>Đang giao hàng</option>
+                                            <option value="4" @if($order->status ==4) selected @endif>Hoàn thành</option>
+                                            <option value="5" @if($order->status ==5) selected @endif>Hủy</option>
+                                        </select>
                                     </td>
                                 </tr>
 
@@ -74,7 +65,6 @@
                             <table class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
-
                                     <th>STT</th>
                                     <th>Tên sản phẩm</th>
                                     <th>Hình ảnh</th>
@@ -83,18 +73,17 @@
                                     <th>Tổng tiền</th>
                                     <th>Store</th>
                                     <th>Trạng thái</th>
-
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($detailOrder as $k => $detail)
+                                @foreach($orderDetail as $k => $detail)
                                 <tr>
                                     <td>{{ $k+1 }}</td>
-                                    <td>{{ $detail->product_name }}</td>
-                                    <td><img src="{{ asset( $detail->product_img ) }}" style="width:100px" alt=""></td>
-                                    <td>{{ $detail->product_numb }}</td>
-                                    <td>{{ number_format($detail->product_price) }}</td>
-                                    <td>{{ number_format($detail->product_price * $detail->product_numb) }}</td>
+                                    <td>{{ $detail->product->name }}</td>
+                                    <td><img src="{{ asset($detail->product->image) }}" style="width:100px" alt=""></td>
+                                    <td>{{ $detail->qty }}</td>
+                                    <td>{{ number_format($detail->price) }}</td>
+                                    <td>{{ number_format($detail->price * $detail->qty) }}</td>
                                     @if($detail->admin_id)
                                         <?php if($detail->admin_id){
                                             $adminx = DB::table('admins')->select('full_name', 'id')->where('id', $detail->admin_id)->first();
@@ -109,7 +98,6 @@
                                     @endif
                                     <td>
                                         <?php
-
                                         switch ($detail->status) {
                                             case '0':
                                                 echo "Mới đặt";
@@ -139,4 +127,24 @@
             </div><!-- /.col -->
         </div><!-- /.row -->
     </section><!-- /.content -->
+    <script>
+        $('#status_order').on('change', function () {
+            var status = $(this).val();
+            var orderId = $(this).attr('data-id');
+            $.ajax({
+                url: ' {{ route("admin.order.updateStatus") }}',
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    status: status,
+                    orderId: orderId,
+                },
+                success: function(res){
+                    if(res == 1){
+                        toastr["success"]("Cập nhật trạng thái thành công!");
+                    }
+                }
+            });
+        });
+    </script>
 @endsection

@@ -35,16 +35,31 @@
                             <th>Giá bán</th>
                             <th>Tổng tiền</th>
                             <th>Trạng thái</th>
+
                         </tr>
                         </thead>
                         <tbody>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                        @foreach($orders as $item)
+                            <tr>
+                                <td>{{ $item->order->code }}</td>
+                                <td>{{ $item->product->name }}</td>
+                                <td><img src="{{ asset($item->product->image) }}" style="width: 100px" alt=""></td>
+                                <td>{{ $item->qty }}</td>
+                                <td>{{ number_format($item->price) }}</td>
+                                <td>{{ number_format($item->totalprice) }}</td>
+                                <td>
+                                    <button class="btn-toggle-status btnx btn-{{ !$item->status? 'warning btn-access' : 'success' }} btn-sm"
+                                            order-id="{{ $item->id }}">
+                                        @if(!$item->status)
+                                            Mới đặt
+                                        @else
+                                            Xác nhận
+                                        @endif
+                                    </button>
+                                </td>
+
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
 
@@ -53,4 +68,32 @@
         </section>
 
     </main>
+    <script>
+        $('.btn-toggle-status').on('click', function() {
+            var btn = $(this);
+            if (btn.hasClass('btn-success')) {
+                return;
+            }
+            btn.attr('disabled', '');
+            $.ajax({
+                url: '{{ route("store.order.status") }}',
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    order_id: btn.attr('order-id')
+                },
+                success: function(res) {
+                    if (res == 0) {
+                        btn.addClass('btn-warning').removeClass('btn-success');
+                        btn.text('Mới đặt');
+                    }
+                    if (res == 1) {
+                        btn.addClass('btn-success').removeClass('btn-warning');
+                        btn.text('Xác nhận');
+                    }
+                    btn.removeAttr('disabled', '');
+                }
+            });
+        });
+    </script>
 @endsection

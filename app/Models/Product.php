@@ -38,7 +38,6 @@ class Product extends AbstractModel
     {
         $query = $this->select('name', 'slug', 'image', 'is_highlight', 'id','active','category_id')
             ->orderBy('id', 'desc')
-            ->where('admin_id',1)
             ->get();
         return $query;
     }

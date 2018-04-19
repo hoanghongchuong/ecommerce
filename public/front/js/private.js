@@ -331,5 +331,6 @@ jQuery(function ($) {
         CKEDITOR.replace('contentProduct2' );
 
 
+
     });
 });

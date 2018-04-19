@@ -32,6 +32,7 @@ Route::group(['middleware' => 'is_store', 'prefix' => 'store'], function(){
     });
     Route::group(['prefix' => 'order'], function (){
         Route::get('/', 'Front\StoreController@order')->name('store.order.index');
+        Route::post('order/status', 'Front\StoreController@UpdateStatus')->name('store.order.status');
     });
 });
 
@@ -79,6 +80,8 @@ Route::group(['middleware' => 'admin', 'prefix' => 'backend'], function (){
         Route::get('edit/{id}','Admin\StoreController@detailStore')->name('admin.store.detail');
 
         Route::get('delete/{id}', 'Admin\StoreController@delete')->name('admin.store.delete');
+
+
     });
 
     Route::group(['prefix' => 'order'], function() {
@@ -86,6 +89,8 @@ Route::group(['middleware' => 'admin', 'prefix' => 'backend'], function (){
         Route::get('detail/{id}', 'Admin\OrderController@detail')->name('admin.order.detail');
 
         Route::get('delete/{id}', 'Admin\OrderController@delete')->name('admin.order.delete');
+
+        Route::post('update/status', 'Admin\OrderController@updateStatus')->name('admin.order.updateStatus');
     });
 
     /*

@@ -3285,6 +3285,11 @@ select .fa-star {
     /*float:right;*/
     padding: 10px 10px;
 }
+.btnx{
+    padding: 6px 12px;
+    display: inline-block;
+    /*color: #fff;*/
+}
 /*#step-register .wizard > .actions li:nth-child(1) a,*/
 /*#step-register .wizard > .actions li:nth-child(1) a:hover,*/
 /*#step-register .wizard > .actions li:nth-child(1) a:active  {*/

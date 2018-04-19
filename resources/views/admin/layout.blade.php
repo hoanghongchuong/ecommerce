@@ -28,6 +28,7 @@
     <!-- Daterange picker -->
     <link rel="stylesheet" href="{{asset('/admin_assets/plugins/daterangepicker/daterangepicker-bs3.css')}}">
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="{{asset('/admin_assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
     <!-- jQuery 2.1.4 -->
@@ -96,11 +97,31 @@
     <script src="{{asset('/admin_assets/dist/js/app.min.js')}}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{asset('/admin_assets/dist/js/pages/dashboard.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{asset('/admin_assets/dist/js/demo.js')}}"></script>
 <script>
     for(var i = 1; i < 5; i++){
         CKEDITOR.replace('textContent' + i);
+    }
+</script>
+<script>
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
     }
 </script>
 </body>

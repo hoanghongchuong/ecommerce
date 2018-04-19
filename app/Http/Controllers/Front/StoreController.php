@@ -7,13 +7,15 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Order;
+use App\Models\OrderDetail;
 class StoreController extends AbstractBaseController
 {
-    public function __construct(Category $category, Product $product, Order $order)
+    public function __construct(Category $category, Product $product, Order $order, OrderDetail $orderDetail)
     {
         $this->Category = $category;
         $this->Product = $product;
         $this->Order = $order;
+        $this->OrderDetail = $orderDetail;
     }
     public function index()
     {
@@ -69,8 +71,25 @@ class StoreController extends AbstractBaseController
      */
     public function order(Request $req)
     {
-        $orders = $this->Order->all();
+        $orders = $this->OrderDetail->where('store_id', $req->is_store->id)->get();
+        return view('front.store.order.index', compact('orders'));
+    }
 
-        return view('front.store.order.index');
+    /*
+     * action updateStatus
+     * update status order store
+     * @param Request $req
+     * @return void
+     */
+    public function UpdateStatus(Request $req)
+    {
+        $order = $this->OrderDetail->where('id', $req->order_id)->first();
+        if ($order) {
+            $order->status =  $order->status == 1 ? 0 : 1;
+            $order->save();
+            // $contact->toggleStatus()->save();
+
+            return (Int)$order->status;
+        }
     }
 }

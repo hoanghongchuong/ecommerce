@@ -16,34 +16,38 @@
                     <div class="product-detail">
                         <div class="row">
                             <div class="col-md-4">
+                                @if(count($albums) > 0)
                                 <div id="sync1" class="product-image-slider owl-carousel owl-theme not-dqowl">
-                                    @if($albums)
+
                                     @foreach($albums as $album)
                                     <a href="{{ asset($album->image)}}" data-fancybox="images">
                                         <img src="{{ asset($album->image)}}" alt="" title="">
                                     </a>
                                     @endforeach
-                                    @else
-                                        <a href="{{ asset($product->image)}}" data-fancybox="images">
-                                            <img src="{{ asset($product->image)}}" alt="" title="">
-                                        </a>
-                                    @endif
+
                                 </div>
+                                @else
+                                    <a href="{{ asset($product->image)}}">
+                                        <img src="{{ asset($product->image)}}" alt="" title="">
+                                    </a>
+                                @endif
+
                                 <div id="sync2" class="slider-general owl-carousel  not-dqowl mgt-15">
-                                @if($albums)
+                                    @if(count($albums) > 0)
                                     @foreach($albums as $album)
                                     <div class="item">
                                         <a href="" title="" class=""><img src="{{ asset($album->image)}}" alt="" title="">
                                         </a>
                                     </div>
                                     @endforeach
-                                @else
-                                    <div class="item">
-                                        <a href="" title="" class=""><img src="{{ asset($product->image)}}" alt="" title="">
-                                        </a>
-                                    </div>
-                                @endif
+                                    @else
+                                        <div class="item">
+                                            <a href="" title="" class=""><img src="{{ asset($product->image)}}" alt="" title="">
+                                            </a>
+                                        </div>
+                                    @endif
                                 </div>
+
                                 <div class="action-facebook">
                                     <div class="facebook-icon"><img src="{{ asset('/front/images/icon/i-bluan.png')}}"> </div>
                                     <div class="wishlist">
@@ -271,7 +275,7 @@
                                     <div class="cmt-box">
                                         <div class="comment-item cmt-question">
                                             <div class="avata-cmt">
-                                                <img src="images/icon/icon-avatar-1.jpg" alt="" title="">
+                                                <img src="{{ asset('/front/images/icon/icon-avatar-1.jpg')}}" alt="" title="">
                                             </div>
                                             <div class="info-cmt">
                                                 <div class="cus-info">
@@ -299,7 +303,7 @@
                                         </div>
                                         <div class="comment-item cmt-reply admin-reply">
                                             <div class="avata-cmt">
-                                                <img src="images/icon/icon-avatar-2.jpg" alt="" title="">
+                                                <img src="{{ asset('/front/images/icon/icon-avatar-2.jpg')}}" alt="" title="">
                                             </div>
                                             <div class="info-cmt">
                                                 <div class="cus-info">
@@ -314,7 +318,7 @@
                                         </div>
                                         <div class="comment-item cmt-reply">
                                             <div class="avata-cmt">
-                                                <img src="images/icon/icon-avatar-2.jpg" alt="" title="">
+                                                <img src="{{ asset('/front/images/icon/icon-avatar-2.jpg')}}" alt="" title="">
                                             </div>
                                             <div class="info-cmt">
                                                 <div class="cus-info">
@@ -337,7 +341,7 @@
                                     <li>
                                         <div class="block-hori">
                                             <div class="hori-left">
-                                                <a href="san-pham-chi-tiet.html" title=""><img src="images/product/product-20.png" alt="" title=""> </a>
+                                                <a href="san-pham-chi-tiet.html" title=""><img src="{{ asset('/front/images/product/product-20.png')}}" alt="" title=""> </a>
                                             </div>
                                             <div class="hori-right">
                                                 <p><a href="san-pham-chi-tiet.html" title="">Bộ 2 thùng 24 lon bia Tiger Crystal 330 ml</a> </p>
@@ -348,7 +352,7 @@
                                     <li>
                                         <div class="block-hori">
                                             <div class="hori-left">
-                                                <a href="san-pham-chi-tiet.html" title=""><img src="images/product/product-19.png" alt="" title=""> </a>
+                                                <a href="san-pham-chi-tiet.html" title=""><img src="{{ asset('/front/images/product/product-19.png')}}" alt="" title=""> </a>
                                             </div>
                                             <div class="hori-right">
                                                 <p><a href="san-pham-chi-tiet.html" title="">Bộ 2 thùng 24 lon bia Tiger Crystal 330 ml</a> </p>
@@ -359,7 +363,7 @@
                                     <li>
                                         <div class="block-hori">
                                             <div class="hori-left">
-                                                <a href="san-pham-chi-tiet.html" title=""><img src="images/product/product-18.png" alt="" title=""> </a>
+                                                <a href="san-pham-chi-tiet.html" title=""><img src="{{ asset('/front/images/product/product-18.png')}}" alt="" title=""> </a>
                                             </div>
                                             <div class="hori-right">
                                                 <p><a href="san-pham-chi-tiet.html" title="">Bộ 2 thùng 24 lon bia Tiger Crystal 330 ml</a> </p>
@@ -370,7 +374,7 @@
                                     <li>
                                         <div class="block-hori">
                                             <div class="hori-left">
-                                                <a href="san-pham-chi-tiet.html" title=""><img src="images/product/product-17.png" alt="" title=""> </a>
+                                                <a href="san-pham-chi-tiet.html" title=""><img src="{{ asset('/front/images/product/product-17.png')}}" alt="" title=""> </a>
                                             </div>
                                             <div class="hori-right">
                                                 <p><a href="san-pham-chi-tiet.html" title="">Bộ 2 thùng 24 lon bia Tiger Crystal 330 ml</a> </p>
@@ -381,7 +385,7 @@
                                     <li>
                                         <div class="block-hori">
                                             <div class="hori-left">
-                                                <a href="san-pham-chi-tiet.html" title=""><img src="images/product/product-16.png" alt="" title=""> </a>
+                                                <a href="san-pham-chi-tiet.html" title=""><img src="{{ asset('/front/images/product/product-16.png')}}" alt="" title=""> </a>
                                             </div>
                                             <div class="hori-right">
                                                 <p><a href="san-pham-chi-tiet.html" title="">Bộ 2 thùng 24 lon bia Tiger Crystal 330 ml</a> </p>
@@ -392,7 +396,7 @@
                                     <li>
                                         <div class="block-hori">
                                             <div class="hori-left">
-                                                <a href="" title=""><img src="images/product/product-15.png" alt="" title=""> </a>
+                                                <a href="" title=""><img src="{{ asset('/front/images/product/product-15.png')}}" alt="" title=""> </a>
                                             </div>
                                             <div class="hori-right">
                                                 <p><a href="" title="">Bộ 2 thùng 24 lon bia Tiger Crystal 330 ml</a> </p>
@@ -402,7 +406,7 @@
                                     </li>
                                 </ul>
                                 <div class="mgt-20 ads">
-                                    <a href="" title=""><img src="images/banner/ads-1.jpg" alt="" title=""> </a>
+                                    <a href="" title=""><img src="{{ asset('/front/images/banner/ads-1.jpg')}}" alt="" title=""> </a>
                                 </div>
                             </div>
                         </div>
@@ -412,34 +416,34 @@
                     <h5>Sản phẩm đã xem</h5>
                     <div class="watched-slider owl-carousel">
                         <div class="watched-item">
-                            <a href="" title=""><img src="images/product/img-cate-1.png" alt="" title=""> </a>
+                            <a href="" title=""><img src="{{ asset('/front/images/product/img-cate-1.png')}}" alt="" title=""> </a>
                         </div>
                         <div class="watched-item">
-                            <a href="" title=""><img src="images/product/img-cate-2.png" alt="" title=""> </a>
+                            <a href="" title=""><img src="{{ asset('/front/images/product/img-cate-2.png')}}" alt="" title=""> </a>
                         </div>
                         <div class="watched-item">
-                            <a href="" title=""><img src="images/product/img-cate-3.png" alt="" title=""> </a>
+                            <a href="" title=""><img src="{{ asset('/front/images/product/img-cate-3.png')}}" alt="" title=""> </a>
                         </div>
                         <div class="watched-item">
-                            <a href="" title=""><img src="images/product/img-cate-4.png" alt="" title=""> </a>
+                            <a href="" title=""><img src="{{ asset('/front/images/product/img-cate-4.png')}}" alt="" title=""> </a>
                         </div>
                         <div class="watched-item">
-                            <a href="" title=""><img src="images/product/img-cate-5.png" alt="" title=""> </a>
+                            <a href="" title=""><img src="{{ asset('/front/images/product/img-cate-5.png')}}" alt="" title=""> </a>
                         </div>
                         <div class="watched-item">
-                            <a href="" title=""><img src="images/product/img-cate-6.png" alt="" title=""> </a>
+                            <a href="" title=""><img src="{{ asset('/front/images/product/img-cate-6.png')}}" alt="" title=""> </a>
                         </div>
                         <div class="watched-item">
-                            <a href="" title=""><img src="images/product/img-cate-1.png" alt="" title=""> </a>
+                            <a href="" title=""><img src="{{ asset('/front/images/product/img-cate-1.png')}}" alt="" title=""> </a>
                         </div>
                         <div class="watched-item">
-                            <a href="" title=""><img src="images/product/img-cate-2.png" alt="" title=""> </a>
+                            <a href="" title=""><img src="{{ asset('/front/images/product/img-cate-2.png')}}" alt="" title=""> </a>
                         </div>
                         <div class="watched-item">
-                            <a href="" title=""><img src="images/product/img-cate-4.png" alt="" title=""> </a>
+                            <a href="" title=""><img src="{{ asset('/front/images/product/img-cate-4.png')}}" alt="" title=""> </a>
                         </div>
                         <div class="watched-item">
-                            <a href="" title=""><img src="images/product/img-cate-6.png" alt="" title=""> </a>
+                            <a href="" title=""><img src="{{ asset('/front/images/product/img-cate-6.png')}}" alt="" title=""> </a>
                         </div>
                     </div>
                 </div>
@@ -451,19 +455,19 @@
                     <div class="col-md-6">
                         <h6 class="text-uppercase">CÁCH THỨC THANH TOÁN</h6>
                         <ul class="flex-center">
-                            <li><a href="" title=""><img src="images/product/payment-1.png" alt="" title=""> </a> </li>
-                            <li><a href="" title=""><img src="images/product/payment-2.png" alt="" title=""> </a> </li>
-                            <li><a href="" title=""><img src="images/product/payment-3.png" alt="" title=""> </a> </li>
-                            <li><a href="" title=""><img src="images/product/payment-4.png" alt="" title=""> </a> </li>
-                            <li><a href="" title=""><img src="images/product/payment-5.png" alt="" title=""> </a> </li>
+                            <li><a href="" title=""><img src="{{ asset('/front/images/product/payment-1.png')}}" alt="" title=""> </a> </li>
+                            <li><a href="" title=""><img src="{{ asset('/front/images/product/payment-2.png')}}" alt="" title=""> </a> </li>
+                            <li><a href="" title=""><img src="{{ asset('/front/images/product/payment-3.png')}}" alt="" title=""> </a> </li>
+                            <li><a href="" title=""><img src="{{ asset('/front/images/product/payment-4.png')}}" alt="" title=""> </a> </li>
+                            <li><a href="" title=""><img src="{{ asset('/front/images/product/payment-5.png')}}" alt="" title=""> </a> </li>
                         </ul>
                     </div>
                     <div class="col-md-3">
                         <h6 class="text-uppercase">DỊCH VỤ GIAO HÀNG</h6>
                         <ul class="flex-center">
-                            <li><a href="" title=""><img src="images/product/transit-1.png" alt="" title=""> </a> </li>
-                            <li><a href="" title=""><img src="images/product/transit-2.png" alt="" title=""> </a> </li>
-                            <li><a href="" title=""><img src="images/product/transit-3.png" alt="" title=""> </a> </li>
+                            <li><a href="" title=""><img src="{{ asset('/front/images/product/transit-1.png')}}" alt="" title=""> </a> </li>
+                            <li><a href="" title=""><img src="{{ asset('/front/images/product/transit-2.png')}}" alt="" title=""> </a> </li>
+                            <li><a href="" title=""><img src="{{ asset('/front/images/product/transit-3.png')}}" alt="" title=""> </a> </li>
                         </ul>
                     </div>
                     <div class="col-md-3 newsletter">

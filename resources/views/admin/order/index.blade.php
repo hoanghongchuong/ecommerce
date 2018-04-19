@@ -71,10 +71,10 @@
                                     </td>
                                     <td>
                                         <a href="{{ route('admin.order.detail', $item->id) }}" class="btn btn-warning" style="margin-right: 5px;">
-                                            <i class="fa fa-eye">Chi tiết</i>
+                                            <i class="fa fa-eye"> Chi tiết</i>
                                         </a>
                                         <a href="{{ route('admin.order.delete', $item->id) }}" class="btn btn-danger">
-                                            <i class="fa fa-trash-0">Xóa</i>
+                                            <i class="fa fa-trash"> Xóa</i>
                                         </a>
                                     </td>
                                 </tr>

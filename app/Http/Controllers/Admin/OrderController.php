@@ -5,16 +5,18 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderDetail;
 use Illuminate\Session\Store;
 use App\Models\Store as Stores;
 use App\Models\Admin;
 class OrderController extends Controller
 {
-    public function __construct(Order $order, Stores $store, Admin $admin)
+    public function __construct(Order $order, Stores $store, Admin $admin, OrderDetail $orderDetail )
     {
         $this->Order = $order;
         $this->Admin = $admin;
         $this->Stores = $store;
+        $this->OrderDetail = $orderDetail;
     }
 
     /*
@@ -28,18 +30,27 @@ class OrderController extends Controller
         return view('admin.order.index', compact('orders'));
     }
     /*
-     * action detal
+     * action detail
      * get detail order
      * @return view
      */
     public function detail($id)
     {
         $order = $this->Order->find($id);
-        $detailOrder = json_decode($order->detail);
-
-        return view('admin.order.detail', compact('order','detailOrder'));
+        $orderDetail = $this->OrderDetail->where('order_id', $order->id)->get();
+        return view('admin.order.detail', compact('order', 'orderDetail'));
     }
 
+    public function updateStatus(Request $req)
+    {
+        $status = $req->status;
+        $order = $this->Order->find($req->orderId);
+        $this->Order->where('id', $req->orderId)->update(['status' => $status]);
+        return 1;
+    }
+    /*
+     * action delete order
+     */
     public function delete($id)
     {
         $data = $this->Order->find($id);
