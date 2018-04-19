@@ -83,13 +83,24 @@ class StoreController extends AbstractBaseController
      */
     public function UpdateStatus(Request $req)
     {
-        $order = $this->OrderDetail->where('id', $req->order_id)->first();
-        if ($order) {
-            $order->status =  $order->status == 1 ? 0 : 1;
-            $order->save();
-            // $contact->toggleStatus()->save();
+        $orderDetail = $this->OrderDetail->where('id', $req->order_id)->first();
+        $order = $this->Order->where('id', $orderDetail->order_id)->first();        
+        $listOrderDetail = $this->OrderDetail->where('order_id', $order->id)->get();
+        // $kiemtra = false;
+        foreach($listOrderDetail as $item){
+            if($item->status==1){
+                $order->status =  2;
 
-            return (Int)$order->status;
+                $order->save();
+                break; 
+            }
         }
+        if ($orderDetail) {
+            $orderDetail->status =  $orderDetail->status == 1 ? 0 : 1;
+            $orderDetail->save();
+            return (Int)$orderDetail->status;
+        }
+    
+            
     }
 }
