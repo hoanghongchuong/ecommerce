@@ -15,9 +15,9 @@ class RootController extends AbstractBaseController
     public function __construct(Category $category, Product $product, Admin $admin, Store $store)
     {
         $this->Category = $category;
-        $this->Product = $product;
-        $this->Store = $store;
-        $this->Admin = $admin;
+        $this->Product  = $product;
+        $this->Store    = $store;
+        $this->Admin    = $admin;
     }
     public function index($slug)
     {
@@ -32,24 +32,24 @@ class RootController extends AbstractBaseController
     public function getProductByCate($slug)
     {
         $array_string = explode('-', $slug);
-        $last = array_pop($array_string);
-        $id = substr($last, 1);
-        $category = $this->Category->getOneCategoryById($id);
-        $products = $category->products;
-        $numbProduct = count($products);
+        $last         = array_pop($array_string);
+        $id           = substr($last, 1);
+        $category     = $this->Category->getOneCategoryById($id);
+        $products     = $category->products;
+        $numbProduct  = count($products);
         return view('front.product.list', compact('products', 'category', 'numbProduct'));
 
     }
     public function getDetailProduct($slug)
     {
         $array_string = explode('-', $slug);
-        $last = array_pop($array_string);
-        $id = substr($last, 1);
-        $product = $this->Product->getDetail($id);
-        $albums = $this->Product->getAlbum($product->id);
-        $category = $this->Category->getOneCategoryById($product->category_id);
-        $admin = $this->Admin->where('id', $product->admin_id)->first();
-        $store = $this->Store->where('id', $product->store_id)->first();
+        $last         = array_pop($array_string);
+        $id           = substr($last, 1);
+        $product      = $this->Product->getDetail($id);
+        $albums       = $this->Product->getAlbum($product->id);
+        $category     = $this->Category->getOneCategoryById($product->category_id);
+        $admin        = $this->Admin->where('id', $product->admin_id)->first();
+        $store        = $this->Store->where('id', $product->store_id)->first();
         return view('front.product.detail', compact('product', 'category', 'albums','store','admin'));
     }
 }

@@ -47,8 +47,8 @@ class StoreController extends AbstractBaseController
             return view('front.store.product.create', compact('categories'));
         }
         $req->validate([
-            'name' => 'required',
-            'slug' => 'nullable',
+            'name'  => 'required',
+            'slug'  => 'nullable',
             'image' => 'nullable|image|max:2048',
             'price' => 'required'
         ]);

@@ -53,14 +53,14 @@ class OrderController extends Controller
             return 'product not found';
         }
         Cart::add(array(
-            'id' => $product->id,
-            'name' => $product->name,
-            'qty' => $data['product_numb'],
-            'price' => $product->price,
-            'options' => array(
-                'image' => $product->image,
-                'code' => $product->code,
-                'slug' => $product->slug,
+            'id'           => $product->id,
+            'name'         => $product->name,
+            'qty'          => $data['product_numb'],
+            'price'        => $product->price,
+            'options'      => array(
+                'image'    => $product->image,
+                'code'     => $product->code,
+                'slug'     => $product->slug,
                 'store_id' => $product->store_id,
                 'admin_id' => $product->admin_id,
 
@@ -113,31 +113,31 @@ class OrderController extends Controller
         $cart = Cart::Content();
         $info = $req->session()->get('info');
         // dd($infor);
-        $order = new Order;
-        $order->full_name = $info['full_name'];
-        $order->phone = $info['phone'];
-        $order->email = $info['email'];
-        $order->address = $info['address'];
-        $order->content = $info['content'];
-        $order->code = str_random(6);
-        $total = $this->getTotalPrice();
+        $order                 = new Order;
+        $order->full_name      = $info['full_name'];
+        $order->phone          = $info['phone'];
+        $order->email          = $info['email'];
+        $order->address        = $info['address'];
+        $order->content        = $info['content'];
+        $order->code           = str_random(6);
+        $total                 = $this->getTotalPrice();
         $order->payment_method = $req->payment_method;
-        $order->total = $total;
-        $order->status = 0;
+        $order->total          = $total;
+        $order->status         = 0;
         if($total > 0){
             $order->save();
             foreach($cart as $key){
                 $product = $this->Product->where('id', $key->id)->first();
                 // dd($product->admin_id);
-                $orderDetail = new OrderDetail;
+                $orderDetail             = new OrderDetail;
                 $orderDetail->product_id = $key->id;
-                $orderDetail->order_id = $order->id;
-                $orderDetail->admin_id = $product->admin_id;
-                $orderDetail->store_id = $product->store_id;
-                $orderDetail->price = $key->price;
-                $orderDetail->qty = $key->qty;
+                $orderDetail->order_id   = $order->id;
+                $orderDetail->admin_id   = $product->admin_id;
+                $orderDetail->store_id   = $product->store_id;
+                $orderDetail->price      = $key->price;
+                $orderDetail->qty        = $key->qty;
                 $orderDetail->totalprice = $key->price * $key->qty;
-                $orderDetail->status = 0;   
+                $orderDetail->status     = 0;   
                 $orderDetail->save(); 
             }
 

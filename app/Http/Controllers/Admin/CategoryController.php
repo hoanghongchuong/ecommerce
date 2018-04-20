@@ -44,10 +44,10 @@ class CategoryController extends Controller
             'slug' => 'nullable',
             'image' => 'nullable|image|max:2048',
         ]);
-        $data = $req->only($this->Category->getFieldList());
-        $data['name'] = $req->name;
+        $data              = $req->only($this->Category->getFieldList());
+        $data['name']      = $req->name;
         $data['parent_id'] = $req->parent_id;
-        $data['admin_id'] = $req->admin->id;
+        $data['admin_id']  = $req->admin->id;
         if($req->slug){
             $data['slug'] = $req->slug;
         }else{

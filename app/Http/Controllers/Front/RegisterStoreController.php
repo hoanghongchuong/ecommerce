@@ -14,8 +14,8 @@ class RegisterStoreController extends Controller
     public function __construct(Province $province, Store $store)
     {
         $this->Province = $province;
-        $this->Store = $store;
-        $this->guard = Auth::guard('is_store');
+        $this->Store    = $store;
+        $this->guard    = Auth::guard('is_store');
     }
     /*
      * action get view register store
@@ -33,25 +33,25 @@ class RegisterStoreController extends Controller
     public function postRegister(Request $req)
     {
         $req->validate([
-            'full_name' => 'required',
-            'phone' => 'required',
-            'email' => 'required|email|unique:stores',
-            'province_id' => 'required',
-            'district_id' => 'required',
-            'address' => 'required',
+            'full_name'        => 'required',
+            'phone'            => 'required',
+            'email'            => 'required|email|unique:stores',
+            'province_id'      => 'required',
+            'district_id'      => 'required',
+            'address'          => 'required',
             'business_license' => 'required',
 
         ]);
         $data = $req->only($this->Store->getFieldList());
         $data['password'] = \Hash::make('123456');
         if ($req->hasFile('business_license')) {
-            $image         = $req->file('business_license');
+            $image                    = $req->file('business_license');
             $data['business_license'] = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('uploads/store'), $data['business_license']);
             $data['business_license'] = 'uploads/store/' . $data['business_license'];
         }
         if ($req->hasFile('registration_certificate')) {
-            $image         = $req->file('registration_certificate');
+            $image                            = $req->file('registration_certificate');
             $data['registration_certificate'] = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('uploads/store'), $data['registration_certificate']);
             $data['registration_certificate'] = 'uploads/store/' . $data['registration_certificate'];
@@ -75,9 +75,9 @@ class RegisterStoreController extends Controller
         $account = $req->only(['email', 'password']);
         // dd($account);
         if($this->guard->attempt([
-           'email' => $account['email'],
+           'email'    => $account['email'],
            'password' => $account['password'],
-           'status' => Store::ACTIVE,
+           'status'   => Store::ACTIVE,
         ])){
             return redirect()->route('store.index');
         }else{
