@@ -52,7 +52,7 @@ class ProductController extends Controller
             $image         = $req->file('image');
             $data['image'] = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('uploads/products'), $data['image']);
-            $data['image'] = 'uploads/products/' . $data['image'];
+            $data['image'] = 'public/uploads/products/' . $data['image'];
         }
         
         // if ($req->hasFile('album_image')) {
@@ -73,7 +73,7 @@ class ProductController extends Controller
                 $file->move(public_path('uploads/products'), $imageFileName);
                 $galeries[] = [
                     'product_id' => $newProduct->id,
-                    'image' => 'uploads/products/' . $imageFileName
+                    'image' => 'public/uploads/products/' . $imageFileName
                 ];
             }
         }

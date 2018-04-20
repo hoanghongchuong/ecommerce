@@ -45,10 +45,10 @@ class RegisterStoreController extends Controller
         $data = $req->only($this->Store->getFieldList());
         $data['password'] = \Hash::make('123456');
         if ($req->hasFile('business_license')) {
-            $image                    = $req->file('business_license');
-            $data['business_license'] = time() . '.' . $image->getClientOriginalExtension();
+            $image                            = $req->file('business_license');
+            $data['business_license']         = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('uploads/store'), $data['business_license']);
-            $data['business_license'] = 'uploads/store/' . $data['business_license'];
+            $data['business_license']         = 'uploads/store/' . $data['business_license'];
         }
         if ($req->hasFile('registration_certificate')) {
             $image                            = $req->file('registration_certificate');
@@ -69,8 +69,8 @@ class RegisterStoreController extends Controller
             return view('front.store.login');
         }
         $req->validate([
-           'email' => 'required|email',
-            'password' => 'required'
+           'email'    => 'required|email',
+           'password' => 'required'
         ]);
         $account = $req->only(['email', 'password']);
         // dd($account);
